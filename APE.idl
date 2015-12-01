@@ -1,4 +1,7 @@
-interface NativeAPE
+[
+    Constructor(cstring ip, optional unsigned short port),
+    exposedName=APE
+] interface NativeAPE
 {
-    readonly attribute unsigned short readyState;
+    readonly attribute cstring url;
 };

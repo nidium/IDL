@@ -1,4 +1,6 @@
 var WebIDL2 = require("webidl2");
+var nunjucks = require('nunjucks');
+
 var fs = require('fs');
 var util = require("util");
 
