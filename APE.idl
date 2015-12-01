@@ -1,7 +1,14 @@
+dictionary APEConstructor
+{
+    cstring ip;
+    unsigned short port = 6969;
+};
+
 [
-    Constructor(cstring ip, optional unsigned short port),
+    Constructor(APEConstructor opt),
     exposedName=APE
 ] interface NativeAPE
 {
-    readonly attribute cstring url;
+    attribute EventHandler onclient;
 };
+
