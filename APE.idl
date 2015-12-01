@@ -1,0 +1,4 @@
+interface NativeAPE
+{
+    readonly attribute unsigned short readyState;
+};
