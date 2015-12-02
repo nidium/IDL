@@ -2,10 +2,12 @@
 
 #include <NativeJSExposer.h>
 
-class NativeJS{{classname}} : public NativeJSExposer<NativeJS{{classname}}>
-{{
-    public:
-        NativeJS{{classname}}(JS::HandleObject obj, JSContext *cx);
-        virtual ~NativeJS{{classname}}();
-    private:
-}};
+class NativeBindingInterface_{{name}}
+{
+public:
+    {% if ctor %}
+    static NativeBindingInterface_{{name}} *Constructor();
+    {% endif %}
+    
+private:
+};
