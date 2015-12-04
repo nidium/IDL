@@ -2,17 +2,24 @@
 {% for arg in args %}{{arg.idlType.idlType|ctype}} {{arg.name}}{{ ', ' if not loop.last }}{% endfor %}
 {% endmacro %}
 
+
 {% macro jsval2c(jval, need, dest) %}
 {% if need == 'cstring' %}
 JS::RootedString __curstr(cx, JS::ToString(cx, {{jval}}));
-if (!__curstr) {
-    JS_ReportError(cx, "TypeError");
-    return false;
-}
-JSAutoByteString __curstr_c;
-__curstr_c.encodeUtf8(cx, __curstr);
+                if (!__curstr) {
+                    JS_ReportError(cx, "TypeError");
+                    return false;
+                }
+                JSAutoByteString __curstr_c;
+                __curstr_c.encodeUtf8(cx, __curstr);
 
-char *{{dest}} = __curstr_c.ptr();
+                char *{{dest}} = __curstr_c.ptr();
+{% else %}
+{{need|ctype}} {{dest}};
+                if (!JS::{{ need|convert }}(cx, {{jval}}, &{{dest}})) {
+                    JS_ReportError(cx, "TypeError");
+                    return false;
+                }
 {% endif %}
 {% endmacro %}
 
@@ -47,10 +54,22 @@ public:
             {% for op in attrData.lst %}
             case {{op.arguments.length}}:
             {
-                {{jsval2c('args[0]', 'cstring', foo)}} 
+                /* Start arguments convertion */
+
+                {% for arg in op.arguments %}
+                /* Handle argument #{{ loop.index0 }} of type "{{ arg.idlType.idlType }}" */
+                {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}} 
+                {% endfor %}
+                /* End of arguments convertion */
+
+                obj->{{attrName}}({% for i in range(0, op.arguments.length) %}inArg_{{i}}{{ ', ' if not loop.last }}{%endfor%});
                 break;
             }
             {% endfor %}
+            default:
+                JS_ReportError(cx, "TypeError: wrong number of arguments";)
+                return false;
+                break;
         }
 
         return true;
@@ -72,10 +91,8 @@ static JSClass Socket_class = {
 };
 
 static JSFunctionSpec HTTPResponse_funcs[] = {
-    {% for attr in members %}
-    {% if attr.type == 'operation'%}
-    JS_FN("{{attr.name}}", NativeBindingInterface_{{name}}::js_{{attr.name}}, 0, 0),
-    {%endif%}
+    {% for attrName, attrData in operations %}
+    JS_FN("{{attrName}}", NativeBindingInterface_{{name}}::js_{{attrName}}, {{attrData.maxArgs}}, 0),
     {% endfor %}
     JS_FS_END
 };

@@ -15,8 +15,13 @@ var NidiumIDL = function(file) {
     this.loadConf();
 
     this.env.addFilter('ctype', function(str) {
-        if (!this.typeMapping[str]) return str;
+        if (!this.typeMapping[str] || !this.typeMapping[str].c) return str;
         return this.typeMapping[str].c;
+    }.bind(this));
+
+    this.env.addFilter('convert', function(str) {
+        if (!this.typeMapping[str] || !this.typeMapping[str].convert) return str;
+        return this.typeMapping[str].convert;
     }.bind(this));
 
     this.data = fs.readFileSync(file, {encoding: "utf8"});
