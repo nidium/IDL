@@ -5,7 +5,7 @@
 };*/
 
 [
-    Constructor(APEConstructor opt),
+    Constructor(cstring ip, unsigned short port),
     className=APE
 ] interface NativeAPE
 {
