@@ -44,31 +44,21 @@ public:
             }
             {% endif %}
         }
-
         {% endfor %}
 
         return true;
     }
+
     {% for attr in members %}
     {% set type = attr.idlType.idlType %}
-    {% if type == 'cstring' %}
-    const char *{{attr.name}}() const {
+    const {{type|ctype}} {{attr.name}}() const {
         return m_{{attr.name}};
     }
 
-    {% else %}
-    {{type}} {{attr.name}}() const {
-        return m_{{attr.name}};
-    }
-    {% endif %}
     {% endfor %}
 private:
     {% for attr in members %}
     {% set type = attr.idlType.idlType %}
-    {% if type == 'cstring' %}
-    char *m_{{attr.name}};
-    {% else %}
-    {{type}} m_{{attr.name}};
-    {% endif %}
+    {{ type|ctype }} m_{{attr.name}};
     {% endfor %}
 };

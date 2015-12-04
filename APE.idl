@@ -6,10 +6,12 @@
 
 [
     Constructor(APEConstructor opt),
-    exposedName=APE
+    className=APE
 ] interface NativeAPE
 {
     attribute EventHandler onclient;
+    boolean foobar(int x, cstring foo);
+    boolean foobar(int x, cstring foo, int y);
 };
 
 

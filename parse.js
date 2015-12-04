@@ -4,33 +4,53 @@ var nunjucks = require('nunjucks');
 var fs = require('fs');
 var util = require("util");
 
-nunjucks.configure({
-    trimBlocks: true,
-    lstripBlocks: true
-});
 
-var data = fs.readFileSync("./APE.idl", {encoding: "utf8"});
+var NidiumIDL = function(file) {
 
-var tree = WebIDL2.parse(data);
+    this.env = nunjucks.configure({
+        trimBlocks: true,
+        lstripBlocks: true
+    });
 
-console.log(util.inspect(tree, {colors: true, depth: 16}));
+    this.loadConf();
 
+    this.env.addFilter('ctype', function(str) {
+        if (!this.typeMapping[str]) return str;
+        return this.typeMapping[str].c;
+    }.bind(this));
 
-for (var i = 0; i < tree.length; i++) {
-    var obj = tree[i];
+    this.data = fs.readFileSync(file, {encoding: "utf8"});
+}
 
-    switch(obj.type) {
-        case 'interface':
-            createInterface(obj);
-            break;
-        case 'dictionary':
-            createDict(obj);
-            break;
+NidiumIDL.prototype.loadConf = function() {
+    this.typeMapping = JSON.parse(fs.readFileSync("./types_mapping.json", {encoding: "utf8"}));
+}
+
+NidiumIDL.prototype.parse = function() {
+    this.tree = WebIDL2.parse(this.data);
+}
+
+NidiumIDL.prototype.printTree = function() {
+    console.log(util.inspect(this.tree, {colors: true, depth: 16}));
+}
+
+NidiumIDL.prototype.generate = function() {
+    for (var i = 0; i < this.tree.length; i++) {
+        var obj = this.tree[i];
+
+        switch(obj.type) {
+            case 'interface':
+                this.createInterface(obj);
+                break;
+            case 'dictionary':
+                this.createDict(obj);
+                break;
+        }
     }
 }
 
 
-function createInterface(obj)
+NidiumIDL.prototype.createInterface = function(obj)
 {
     /*
         Scan for constructor
@@ -38,20 +58,48 @@ function createInterface(obj)
     obj.ctor = false;
     for (var i = 0; i < obj.extAttrs.length; i++) {
         var attr = obj.extAttrs[i];
-        console.log("extra", attr.name);
         if (attr.name == 'Constructor') {
             console.log("got ctor");
             obj.ctor = true;
-            break;
+            continue;
+        }
+
+        if (attr.name == "className") {
+            obj.className = attr.rhs.value;
         }
     }
 
-    var interfaceHeader = nunjucks.render('templates/base_class.h', obj);
+    var operations = {};
+
+    for (var i = 0; i < obj.members.length; i++) {
+        var member = obj.members[i];
+        if (member.type != 'operation') continue;
+
+        if (!operations[member.name]) {
+            var op = operations[member.name] = {lst: [], maxArgs: 0, name: member.name};
+        }
+
+        op.lst.push(member);
+        op.maxArgs = Math.max(op.maxArgs, member.arguments.length);
+    }
+
+    obj.operations = operations;
+
+    console.log(obj.operations);
+
+    var interfaceHeader = this.env.render('templates/base_class.h', obj);
     console.log(interfaceHeader);
 }
 
-function createDict(obj) {
-    var dictHeader = nunjucks.render('templates/dict_class.h', obj);
+NidiumIDL.prototype.createDict = function(obj) {
+    var dictHeader = this.env.render('templates/dict_class.h', obj);
 
     console.log(dictHeader);
 }
+
+
+
+var idl = new NidiumIDL("./APE.idl");
+idl.parse();
+idl.printTree();
+idl.generate();
