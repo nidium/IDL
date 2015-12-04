@@ -1,0 +1,9 @@
+{
+    "boolean": {
+        "c": "bool"
+    },
+
+    "cstring": {
+        "c": "char *"
+    }
+}
