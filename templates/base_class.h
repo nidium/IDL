@@ -38,7 +38,7 @@ public:
     {% if ctor %}
     /* These static(s) must be implemented */
     {% for constructor in constructors.lst %}
-    //static NativeBindingInterface_{{name}} *Constructor();
+    //static NativeBindingInterface_{{name}} *Constructor({{arglst(constructor.arguments)}});
     {% endfor %}
 
     template <typename T>
