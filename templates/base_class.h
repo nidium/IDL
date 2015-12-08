@@ -33,7 +33,7 @@ class NativeBindingInterface_{{name}}
 public:
 
     template <typename T>
-    static void registerObject(JSContext *cx);
+    static bool registerObject(JSContext *cx, JS::HandleObject exports = JS::NullPtr());
 
     {% if ctor %}
     /* These static(s) must be implemented */
@@ -82,7 +82,7 @@ static JSFunctionSpec {{ className }}_funcs[] = {
 
 
 template <typename T>
-bool js_{{name}}_Constructor(JSContext *cx, unsigned argc, JS::Value *vp)
+bool NativeBindingInterface_{{name}}::js_{{name}}_Constructor(JSContext *cx, unsigned argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (!args.isConstructing()) {
@@ -125,6 +125,8 @@ bool js_{{name}}_Constructor(JSContext *cx, unsigned argc, JS::Value *vp)
             return false;
             break;
     }
+
+    return true;
 }
 
 {% endif %}
@@ -175,12 +177,17 @@ bool NativeBindingInterface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned ar
 {% endfor %}
 
 template <typename T>
-void NativeBindingInterface_{{name}}::registerObject(JSContext *cx)
+bool NativeBindingInterface_{{name}}::registerObject(JSContext *cx,
+    JS::HandleObject exports)
 {
 {% if ctor %}
-    JS::RootedObject global(cx, JS::CurrentGlobalOrNull(cx));
-    JS_InitClass(cx, global, JS::NullPtr(), &{{ className }}_class,
+    JS::RootedObject to(cx);
+
+    to = exports ? exports : JS::CurrentGlobalOrNull(cx);
+
+    JS_InitClass(cx, to, JS::NullPtr(), &{{ className }}_class,
         NativeBindingInterface_{{name}}::js_{{name}}_Constructor<T>,
         0, NULL, {{ className }}_funcs, NULL, NULL);
 {% endif %}
+    return true;
 }

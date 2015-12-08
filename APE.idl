@@ -6,8 +6,8 @@
 
 [
     Constructor(cstring ip, unsigned short port),
-    className=APE
-] interface NativeAPE
+    className=IDLTest
+] interface IDLTest
 {
     attribute EventHandler onclient;
     boolean foobar(long x, cstring foo);
