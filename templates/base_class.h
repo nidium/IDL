@@ -100,6 +100,12 @@ bool NativeBindingInterface_{{name}}::js_{{name}}_Constructor(JSContext *cx, uns
 
             {% for arg in op.arguments %}
             /* Handle argument #{{ loop.index0 }} of type "{{ arg.idlType.idlType }}" */
+            {% if not arg.idlType.nullable %}
+            if (args[{{ loop.index0 }}].isNull()) {
+                JS_ReportError(cx, "TypeError");
+                return false;
+            }
+            {% endif %}
             {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}} 
             {% endfor %}
             /* End of arguments convertion */
@@ -158,11 +164,23 @@ bool NativeBindingInterface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned ar
 
             {% for arg in op.arguments %}
             /* Handle argument #{{ loop.index0 }} of type "{{ arg.idlType.idlType }}" */
+            {% if not arg.idlType.nullable %}
+            if (args[{{ loop.index0 }}].isNull()) {
+                JS_ReportError(cx, "TypeError");
+                return false;
+            }
+            {% endif %}
             {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}} 
             {% endfor %}
             /* End of arguments convertion */
 
+            {%if op.idlType.idlType != 'void'%}
+            {{ op.idlType.idlType|ctype }} _opret =
+            {%endif%}
             obj->{{attrName}}({% for i in range(0, op.arguments.length) %}inArg_{{i}}{{ ', ' if not loop.last }}{%endfor%});
+
+            args.rval().set{{ op.idlType.idlType|jsvaltype|capitalize }}(_opret);
+
             break;
         }
         {% endfor %}

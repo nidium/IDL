@@ -1,11 +1,13 @@
 {
     "boolean": {
         "c": "bool",
-        "convert": "ToBoolean"
+        "convert": "ToBoolean",
+        "jsval": "boolean"
     },
 
     "cstring": {
-        "c": "char *"
+        "c": "char *",
+        "jsval": "string"
     },
 
     "byte": {

@@ -19,6 +19,11 @@ var NidiumIDL = function(file) {
         return this.typeMapping[str].c;
     }.bind(this));
 
+    this.env.addFilter('jsvaltype', function(str) {
+        if (!this.typeMapping[str] || !this.typeMapping[str].jsval) return 'undefined';
+        return this.typeMapping[str].jsval;
+    }.bind(this));    
+
     this.env.addFilter('convert', function(str) {
         if (!this.typeMapping[str] || !this.typeMapping[str].convert) return str;
         return this.typeMapping[str].convert;
@@ -112,7 +117,7 @@ NidiumIDL.prototype.createDict = function(obj) {
 
 
 
-var idl = new NidiumIDL("./APE.idl");
+var idl = new NidiumIDL("./examples/APE.idl");
 idl.parse();
 idl.printTree();
 idl.generate();
