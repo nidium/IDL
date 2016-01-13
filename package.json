@@ -1,0 +1,23 @@
+{
+  "name": "IDLMonkey",
+  "version": "0.0.0",
+  "description": "IDLMonkey provides an easy way to write JSAPI (SpiderMonkey) C++ <=> JS bindings using WebIDL",
+  "main": "parse.js",
+  "dependencies": {
+    "nunjucks": "~2.2.0",
+    "webidl2": "~2.0.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nidium/IDL.git"
+  },
+  "author": "Anthony Catel",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/nidium/IDL/issues"
+  }
+}
