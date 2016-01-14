@@ -105,7 +105,7 @@ NidiumIDL.prototype.createInterface = function(obj)
 
     console.log(obj.operations);
 
-    var interfaceHeader = this.env.render('templates/base_class.h', obj);
+    var interfaceHeader = this.env.render('templates/base_class.tpl.h', obj);
     console.log(interfaceHeader);
 }
 

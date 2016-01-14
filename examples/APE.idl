@@ -10,7 +10,7 @@
 ] interface IDLTest
 {
     attribute EventHandler onclient;
-    boolean foobar(optional long x, optional int last = "foo");
+    boolean foobar(optional long x, optional long last = "foo");
 
 };
 
