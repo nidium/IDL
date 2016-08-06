@@ -6,8 +6,8 @@
 
 [
     Constructor(cstring ip, unsigned short port),
-    className=IDLTest
-] interface IDLTest
+    className=Hello
+] interface Hello
 {
     attribute EventHandler onclient;
     boolean foobar(optional long x, optional long last = "foo");
