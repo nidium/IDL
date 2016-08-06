@@ -2,7 +2,6 @@
     {% for arg in args %}{{arg.idlType.idlType|ctype}} {{arg.name}}{{ ', ' if not loop.last }}{% endfor %}
 {% endmacro %}
 
-
 {% macro jsval2c(jval, need, dest) %}
     {% if need == 'cstring' %}
         JS::RootedString __curstr(cx, JS::ToString(cx, {{jval}}));
@@ -24,11 +23,14 @@
 {% endmacro %}
 
 #pragma once
+#include <Binding/JSExposer.h>
 
-#include <NativeJSExposer.h>
-#include <jsapi.h>
+namespace Nidium {
+namespace Binding {
 
-class NativeBindingInterface_{{name}}
+{% raw %}// {{{ {% endraw %} {{ name }}
+
+class Interface_{{name}}
 {
 public:
 
@@ -38,7 +40,7 @@ public:
     {% if ctor %}
         /* These static(s) must be implemented */
         {% for constructor in constructors.lst %}
-        //static NativeBindingInterface_{{name}} *Constructor({{arglst(constructor.arguments)}});
+        //static Interface_{{name}} *Constructor({{arglst(constructor.arguments)}});
         {% endfor %}
 
         template <typename T>
@@ -63,24 +65,29 @@ public:
     }
 private:
 };
+{% raw %}// }}} {% endraw %}
 
+{% raw %}// {{{ {% endraw %} Preamble
 static JSClass {{ className }}_class = {
     "{{ className }}", JSCLASS_HAS_PRIVATE,
     JS_PropertyStub, JS_DeletePropertyStub, JS_PropertyStub, JS_StrictPropertyStub,
-    JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub, NativeBindingInterface_{{name}}::JSFinalize,
+    JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub, Interface_{{name}}::JSFinalize,
     nullptr, nullptr, nullptr, nullptr, JSCLASS_NO_INTERNAL_MEMBERS
 };
 
 static JSFunctionSpec {{ className }}_funcs[] = {
     {% for attrName, attrData in operations %}
-        JS_FN("{{attrName}}", NativeBindingInterface_{{name}}::js_{{attrName}}, {{attrData.maxArgs}}, 0),
+        JS_FN("{{attrName}}", Interface_{{name}}::js_{{attrName}}, {{attrData.maxArgs}}, 0),
     {% endfor %}
     JS_FS_END
 };
+{% raw %}// }}} {% endraw %}
 
+{% raw %}// {{{ {% endraw %} Implementation
+{% raw %}// {{{ {% endraw %} Construction
 {% if ctor %}
 template <typename T>
-bool NativeBindingInterface_{{name}}::js_{{name}}_Constructor(JSContext *cx, unsigned argc, JS::Value *vp)
+bool Interface_{{name}}::js_{{name}}_Constructor(JSContext *cx, unsigned argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (!args.isConstructing()) {
@@ -134,9 +141,11 @@ bool NativeBindingInterface_{{name}}::js_{{name}}_Constructor(JSContext *cx, uns
 }
 
 {% endif %}
+{% raw %}// }}} {% endraw %}
 
+{% raw %}// {{{ {% endraw %} Operations
 {% for attrName, attrData in operations %}
-bool NativeBindingInterface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned argc, JS::Value *vp)
+bool Interface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject caller(cx, JS_THIS_OBJECT(cx, vp));
@@ -146,7 +155,7 @@ bool NativeBindingInterface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned ar
         return false;
     }
 
-    NativeBindingInterface_{{name}} *obj = (NativeBindingInterface_{{name}} *)JS_GetInstancePrivate(cx, caller, &{{ className }}_class, NULL);
+    Interface_{{name}} *obj = (Interface_{{name}} *)JS_GetInstancePrivate(cx, caller, &{{ className }}_class, NULL);
     if (!obj) {
         JS_ReportError(cx, "Illegal invocation");
         return false;
@@ -190,10 +199,13 @@ bool NativeBindingInterface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned ar
 
     return true;
 }
+{% raw %}// }}} {% endraw %}
 {% endfor %}
+{% raw %}// }}} {% endraw %}
 
+{% raw %}// {{{ {% endraw %} Registration
 template <typename T>
-bool NativeBindingInterface_{{name}}::registerObject(JSContext *cx,
+bool Interface_{{name}}::registerObject(JSContext *cx,
     JS::HandleObject exports)
 {
     {% if ctor %}
@@ -202,8 +214,12 @@ bool NativeBindingInterface_{{name}}::registerObject(JSContext *cx,
         to = exports ? exports : JS::CurrentGlobalOrNull(cx);
 
         JS_InitClass(cx, to, JS::NullPtr(), &{{ className }}_class,
-            NativeBindingInterface_{{name}}::js_{{name}}_Constructor<T>,
+            Interface_{{name}}::js_{{name}}_Constructor<T>,
             0, NULL, {{ className }}_funcs, NULL, NULL);
     {% endif %}
     return true;
 }
+{% raw %}// }}} {% endraw %}
+
+} // namespace Binding
+} // namespace Nidium

@@ -1,11 +1,15 @@
 #pragma once
 
-#include <NativeBindingDict.h>
+#include <Dict.h>
 
-class NativeBindingDict_{{name}} : public NativeBindingDict
+namespace Nidium {
+namespace Binding {
+
+{% raw %}// {{{ {% endraw %} Dict_{{name}}
+class Dict_{{name}} : public Dict
 {
 public:
-    NativeBindingDict_{{name}}() {
+    Dict_{{name}}() {
         {% for attr in members %}
         {% set type = attr.idlType.idlType %}
         {% if type == 'cstring' %}
@@ -62,3 +66,7 @@ private:
     {{ type|ctype }} m_{{attr.name}};
     {% endfor %}
 };
+{% raw %}// }}} {% endraw %}
+
+} // namespace Binding
+} // namespace Nidium
