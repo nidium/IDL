@@ -44,7 +44,7 @@ public:
         template <typename T>
         static bool js_{{name}}_Constructor(JSContext *cx, unsigned argc, JS::Value *vp);
     {% endif %}
-    
+
     {% for attr in members %}
         {% if attr.type == 'operation'%}
             virtual {{ attr.idlType.idlType|ctype }} {{attr.name}}({{arglst(attr.arguments)}})=0;
@@ -104,7 +104,7 @@ bool NativeBindingInterface_{{name}}::js_{{name}}_Constructor(JSContext *cx, uns
                             return false;
                         }
                     {% endif %}
-                    {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}} 
+                    {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}}
                 {% endfor %}
                 /* End of arguments convertion */
 
@@ -120,7 +120,7 @@ bool NativeBindingInterface_{{name}}::js_{{name}}_Constructor(JSContext *cx, uns
                 JS_SetPrivate(rthis, ret);
 
                 args.rval().setObjectOrNull(rthis);
-                
+
                 break;
             }
         {% endfor %}
@@ -168,7 +168,7 @@ bool NativeBindingInterface_{{name}}::js_{{attrName}}(JSContext *cx, unsigned ar
                         return false;
                     }
                 {% endif %}
-                {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}} 
+                {{jsval2c('args['~ loop.index0 ~']', arg.idlType.idlType, 'inArg_' ~ loop.index0)}}
             {% endfor %}
             /* End of arguments convertion */
 
