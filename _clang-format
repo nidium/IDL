@@ -2,10 +2,10 @@
 AccessModifierOffset: -4
 AlignAfterOpenBracket: true
 AlignConsecutiveAssignments: true
-AlignEscapedNewlinesLeft: false
+AlignEscapedNewlinesLeft: true
 AlignOperands:   true
 AlignTrailingComments: true
-AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
@@ -15,11 +15,11 @@ AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
 AlwaysBreakTemplateDeclarations: true
 BinPackArguments: true
-BinPackParameters: true
+BinPackParameters: false
 BreakBeforeBinaryOperators: All
-BreakBeforeBraces: Linux
+BreakBeforeBraces: Mozilla
 BreakBeforeTernaryOperators: true
-BreakConstructorInitializersBeforeComma: true
+BreakConstructorInitializersBeforeComma: false
 ColumnLimit:    80
 CommentPragmas:  '^ IWYU pragma:'
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
