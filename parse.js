@@ -131,7 +131,6 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
         Scan for constructor
     */
     obj.ctor = false;
-
     var constructors = {
         maxArgs: 0,
         lst: []
@@ -142,13 +141,17 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
         if (attr.name == 'Constructor') {
             obj.ctor = true;
             constructors.lst.push(attr);
-            constructors.maxArgs = Math.max(constructors.maxArgs, attr.arguments.length);
+            var curArg = (attr.arguments) ? attr.arguments.length : 0;
+            constructors.maxArgs = Math.max(constructors.maxArgs, curArg);
             continue;
         }
 
         if (attr.name == "className") {
             obj.className = attr.rhs.value;
         }
+    }
+    if (! obj.className) {
+        obj.className = obj.name;
     }
 
     var operations = {};
