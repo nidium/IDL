@@ -111,7 +111,23 @@ NidiumIDL.prototype.generate = function(outputPath) {
     var created_files = [];
     for (var i = 0; i < this.tree.length; i++) {
         var obj = this.tree[i];
-
+        obj.getMethods = function(operations, thatAreStatic) {
+            statics = []
+            for (var j = 0; j <operations.length; j++){
+                if (operations[j].static == thatAreStatic) {
+                    statics.push(operations[j]);
+                }
+            }
+            return statics; 
+        };
+        obj.hasAttr = function(extAttrs, key) {
+            for( var j = 0; j < extAttrs.length; j++) {
+                if (extAttrs[j].name == key) {
+                    return extAttrs[j];
+                }
+            }
+            return false;
+        };
         switch(obj.type) {
             case 'interface':
                 created_files = created_files.concat(this.createInterface(outputPath, obj));
@@ -160,20 +176,19 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
 
     for (var i = 0; i < obj.members.length; i++) {
         var member = obj.members[i];
-        if (member.type != 'operation') continue;
-
-        if (!operations[member.name]) {
-            var op = operations[member.name] = {lst: [], maxArgs: 0, name: member.name};
+        if (member.type == 'operation') {
+            if (!operations[member.name]) {
+                var op = operations[member.name] = {lst: [], maxArgs: 0, name: member.name};
+            }
+            op.lst.push(member);
+            op.maxArgs = Math.max(op.maxArgs, member.arguments.length);
         }
-
-        op.lst.push(member);
-        op.maxArgs = Math.max(op.maxArgs, member.arguments.length);
     }
 
     obj.constructors = constructors;
     obj.operations = operations;
 
-    //console.log(obj.operations);
+    //console.log(obj.operations.foobar.lst[0]);
     var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
     var fileNameHeader = outputPath + "/impl_" + obj.className + ".h";
     fileNames.push(fileNameHeader);
@@ -196,6 +211,7 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
 
 NidiumIDL.prototype.createDict = function(outputPath, obj) {
     var fileNames = [];
+    //console.log(obj);
     var dictHeader = this.env.render('dict_class.tpl.h', obj);
     var fileName = outputPath + "/dict_" + obj.className + ".h";
     fileNames.push(fileName);
