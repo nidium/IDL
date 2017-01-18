@@ -10,5 +10,6 @@ namespace Binding {
 
 
 {% raw %}// }}} {% endraw %}
+
 } // namespace Binding
 } // namespace Nidium
