@@ -4,10 +4,72 @@ var nunjucks = require('nunjucks');
 var fs = require('fs');
 var util = require("util");
 
+var mapping = {
+    "boolean": {
+        "c": "bool",
+        "convert": "ToBoolean",
+        "jsval": "boolean"
+    },
 
-var NidiumIDL = function(file) {
+    "cstring": {
+        "c": "char *",
+        "jsval": "string"
+    },
 
-    this.env = nunjucks.configure({
+    "byte": {
+        "c": "int8_t",
+        "convert": "ToInt16"
+    },
+
+    "octet": {
+        "c": "uint8_t",
+        "convert": "ToUint16"
+    },
+
+    "short": {
+        "c": "int16_t",
+        "convert": "ToInt16"
+    },
+
+    "unsigned short": {
+        "c": "uint16_t",
+        "convert": "ToUint16"
+    },
+
+    "long": {
+        "c": "int32_t",
+        "convert": "ToInt32"
+    },
+
+    "unsigned long": {
+        "c": "uint32_t",
+        "convert": "ToUint32"
+    },
+
+    "long long": {
+        "c": "int64_t",
+        "convert": "ToInt64"
+    },
+
+    "unsigned long long": {
+        "c": "uint64_t",
+        "convert": "ToUint64"
+    },
+
+    "float": {
+        "c": "double",
+        "convert": "ToNumber"
+    },
+
+    "double": {
+        "c": "double",
+        "convert": "ToNumber"
+    }
+}
+
+var NidiumIDL = function(file, templatePath) {
+
+    this.env = nunjucks.configure(templatePath, {
         trimBlocks: true,
         lstripBlocks: true
     });
@@ -33,7 +95,8 @@ var NidiumIDL = function(file) {
 }
 
 NidiumIDL.prototype.loadConf = function() {
-    this.typeMapping = JSON.parse(fs.readFileSync("./types_mapping.json", {encoding: "utf8"}));
+    this.typeMapping = mapping;
+    //this.typeMapping = JSON.parse(fs.readFileSync("./types_mapping.json", {encoding: "utf8"}));
 }
 
 NidiumIDL.prototype.parse = function() {
@@ -44,23 +107,23 @@ NidiumIDL.prototype.printTree = function() {
     console.log(util.inspect(this.tree, {colors: true, depth: 16}));
 }
 
-NidiumIDL.prototype.generate = function(templatePath, outputPath) {
+NidiumIDL.prototype.generate = function(outputPath) {
     for (var i = 0; i < this.tree.length; i++) {
         var obj = this.tree[i];
 
         switch(obj.type) {
             case 'interface':
-                this.createInterface(templatePath, outputPath, obj);
+                this.createInterface(outputPath, obj);
                 break;
             case 'dictionary':
-                this.createDict(templatePath, outputPath, obj);
+                this.createDict(outputPath, obj);
                 break;
         }
     }
 }
 
 
-NidiumIDL.prototype.createInterface = function(templatePath, outputPath, obj)
+NidiumIDL.prototype.createInterface = function(outputPath, obj)
 {
     /*
         Scan for constructor
@@ -104,7 +167,7 @@ NidiumIDL.prototype.createInterface = function(templatePath, outputPath, obj)
     obj.operations = operations;
 
     //console.log(obj.operations);
-    var interfaceHeader = this.env.render(templatePath + '/base_class.tpl.h', obj);
+    var interfaceHeader = this.env.render('base_class.tpl.h', obj);
     var fileName = outputPath + "/base_" + obj.className + ".h";
     fs.writeFile(fileName, interfaceHeader, function(err) {
         if (err) {
@@ -114,8 +177,8 @@ NidiumIDL.prototype.createInterface = function(templatePath, outputPath, obj)
     });
 }
 
-NidiumIDL.prototype.createDict = function(templatePath, outputPath, obj) {
-    var dictHeader = this.env.render(templatePath + '/dict_class.h', obj);
+NidiumIDL.prototype.createDict = function(outputPath, obj) {
+    var dictHeader = this.env.render('dict_class.h', obj);
     var fileName = outputPath + "/dict_" + obj.className + ".h";
     fs.writeFile(fileName, dictHeader, function(err) {
         if (err) {
@@ -128,8 +191,8 @@ NidiumIDL.prototype.createDict = function(templatePath, outputPath, obj) {
 if (process.argv.length < 5) {
     console.log("Usage : " + process.argv[0] + " " + process.argv[1] + " idlfile templatepath outputpath\n");
 } else {
-    var idl = new NidiumIDL(process.argv[2]);
+    var idl = new NidiumIDL(process.argv[2], process.argv[3]);
     idl.parse();
     //idl.printTree();
-    idl.generate(process.argv[3], process.argv[4]);
+    idl.generate(process.argv[4]);
 }
