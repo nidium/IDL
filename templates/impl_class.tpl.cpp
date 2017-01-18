@@ -6,9 +6,9 @@
 namespace Nidium {
 namespace Binding {
 
-// {{{ Class {{ classname }}
+{% raw %}// Class {{{ {% endraw %} {{name}}
 
 
-// }}}
+{% raw %}// }}} {% endraw %}
 } // namespace Binding
 } // namespace Nidium

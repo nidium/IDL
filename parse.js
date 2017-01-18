@@ -114,13 +114,14 @@ NidiumIDL.prototype.generate = function(outputPath) {
 
         switch(obj.type) {
             case 'interface':
-                created_files.push(this.createInterface(outputPath, obj));
+                created_files = created_files.concat(this.createInterface(outputPath, obj));
                 break;
             case 'dictionary':
-                create_files.push(this.createDict(outputPath, obj));
+                create_files = created_files.concat(this.createDict(outputPath, obj));
                 break;
         }
     }
+
     return created_files;
 }
 
@@ -135,6 +136,7 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
         maxArgs: 0,
         lst: []
     };
+    var fileNames = [];
 
     for (var i = 0; i < obj.extAttrs.length; i++) {
         var attr = obj.extAttrs[i];
@@ -173,26 +175,37 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
 
     //console.log(obj.operations);
     var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
-    var fileName = outputPath + "/impl_" + obj.className + ".h";
-    fs.writeFile(fileName, interfaceHeader, function(err) {
+    var fileNameHeader = outputPath + "/impl_" + obj.className + ".h";
+    fileNames.push(fileNameHeader);
+    fs.writeFile(fileNameHeader, interfaceHeader, function(err) {
         if (err) {
             return console.log(err);
         }
-        //console.log("Wrote " + fileName);
     });
-    return fileName;
+    var interfaceCode = this.env.render('impl_class.tpl.cpp', obj);
+    var fileNameCode = outputPath + "/impl_" + obj.className + ".cpp";
+    fileNames.push(fileNameCode);
+    fs.writeFile(fileNameCode, interfaceCode, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+
+    return fileNames;
 }
 
 NidiumIDL.prototype.createDict = function(outputPath, obj) {
+    var fileNames = [];
     var dictHeader = this.env.render('dict_class.tpl.h', obj);
     var fileName = outputPath + "/dict_" + obj.className + ".h";
+    fileNames.push(fileName);
     fs.writeFile(fileName, dictHeader, function(err) {
         if (err) {
             return console.log(err);
         }
-        //console.log("Wrote " + fileName);
     });
-    return fileName;
+
+    return fileNames;
 }
 
 if (process.argv.length < 5) {
