@@ -182,8 +182,7 @@ namespace Binding {
         {% if not attr.readonly %}
             bool {{ prefix }}{{ className }}::JSSetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
             {
-                {# TODO: uniontype#}
-                {{ attr.idlType }}
+                {# TODO: uniontype attr.idlType #}
                 {{ defs.jsval2c('vp', attr.idlType.idlType, 'inArg_0') }}
 
                 return this->set_{{ attr.name }}(inArg_0);
@@ -197,7 +196,10 @@ namespace Binding {
                 {% if need == 'cstring' %}
                     JS::RootedString jstr(cx, JS_NewStringCopyZ(cx, this->get_{{ attr.name }}()));
                     vp.setString(jstr);
-                {% elif attr.idlType.idlType == 'UNKNOWN' %}
+                {% elif need == 'boolean' %}
+                    {{ need|ctype }} cval = this->get_{{ attr.name }}();
+                    vp.setBoolean(cval);
+                {% elif attr.idlType.idlType == 'unknown' %}
                     {# TODO InterfaceType {{ need.name }}  {{attr.type.__class__}} #}
                 {% else %}
                     {{ need|ctype }} cval = this->get_{{ attr.name }}();

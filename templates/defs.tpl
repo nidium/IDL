@@ -26,7 +26,9 @@
         __curstr_c.encodeUtf8(cx, __curstr);
 
         char *{{ dest }} = __curstr_c.ptr();
-    {% elif not need != 'UNKNOWN' %}
+    {% elif need == 'boolean' %}
+         {{ need|ctype }} {{ dest }} = JS::ToBoolean( {{ jval }});
+    {% elif need == 'unknown' %}
         //TODO: Interface {{ need.name }} :  {{ jval }} {{ need }} {{dest}} {{returning}}
     {% else %}
         {{ need|ctype }} {{ dest }};

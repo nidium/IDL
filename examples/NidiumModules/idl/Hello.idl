@@ -1,8 +1,10 @@
 [
-    Constructor(DOMString bar, optional unsigned short foo),
+    Constructor(cstring bar, optional unsigned short foo),
+    headerfile=HelloBase,
     classname = Hello
 ] interface Hello {
-    attribute DOMString bar;
+    attribute cstring bar;
     attribute unsigned short foo;
     boolean foobar(unsigned short foo);
 };
+

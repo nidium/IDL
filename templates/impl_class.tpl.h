@@ -42,7 +42,7 @@ protected:
          // Methods
         {% for attrName, attr in operations %}
              {% for op in attr.lst %}
-                 {{ op.return_type.idl_type|ctype }} {{ op.name }}({{ defs.arglst(op.arguments) }});
+                 {{ op.return_type.idlType|ctype }} {{ op.name }}({{ defs.arglst(op.arguments) }});
              {% endfor %}
         {% endfor %}
     {% endif %}
@@ -51,14 +51,10 @@ protected:
         {# TODO Setter only #}
         {% for attr in members %}
             {% if not attr.readonly %}
-                {% if attr.type.idl_type != 'UNKNOWN' %}
-                    bool set_{{ attr.name }}({{ attr.type.idl_type|ctype }} {{attr.name }});
-                {% else %}
-                    bool set_{{ attr.name }}({{ attr.name }} );
-                {% endif %}
+                bool set_{{ attr.name }}({{ attr.idlType.idlType|ctype }} {{attr.name }});
             {% endif %}
-            {% if attr.type.idl_type != 'UNKNOWN' %}
-                {{ attr.type.idl_type|ctype }} get_{{ attr.name }}();
+            {% if attr.idlType.idlType|ctype %}
+                {{ attr.idlType.idlType|ctype }} get_{{ attr.name }}();
             {% else %}
                 {{ attr.name }} get_{{ attr.name }}();
             {% endif %}
@@ -67,8 +63,8 @@ protected:
 private:
     // Properties
     {% for attr in members %}
-        {% if attr.type.idl_type != 'UNKNOWN' %}
-            {{ attr.type.idl_type|ctype }} {{ attr.name }};
+        {% if attr.idlType.idlType != 'UNKNOWN' %}
+            {{ attr.idlType.idlType|ctype }} {{ attr.name }};
         {% else %}
             {{ attr.name }} {{ attr.name }};
         {% endif %}
