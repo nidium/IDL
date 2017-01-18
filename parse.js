@@ -172,8 +172,8 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
     obj.operations = operations;
 
     //console.log(obj.operations);
-    var interfaceHeader = this.env.render('base_class.tpl.h', obj);
-    var fileName = outputPath + "/base_" + obj.className + ".h";
+    var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
+    var fileName = outputPath + "/impl_" + obj.className + ".h";
     fs.writeFile(fileName, interfaceHeader, function(err) {
         if (err) {
             return console.log(err);
@@ -184,7 +184,7 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
 }
 
 NidiumIDL.prototype.createDict = function(outputPath, obj) {
-    var dictHeader = this.env.render('dict_class.h', obj);
+    var dictHeader = this.env.render('dict_class.tpl.h', obj);
     var fileName = outputPath + "/dict_" + obj.className + ".h";
     fs.writeFile(fileName, dictHeader, function(err) {
         if (err) {
