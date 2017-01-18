@@ -108,18 +108,20 @@ NidiumIDL.prototype.printTree = function() {
 }
 
 NidiumIDL.prototype.generate = function(outputPath) {
+    var created_files = [];
     for (var i = 0; i < this.tree.length; i++) {
         var obj = this.tree[i];
 
         switch(obj.type) {
             case 'interface':
-                this.createInterface(outputPath, obj);
+                created_files.push(this.createInterface(outputPath, obj));
                 break;
             case 'dictionary':
-                this.createDict(outputPath, obj);
+                create_files.push(this.createDict(outputPath, obj));
                 break;
         }
     }
+    return created_files;
 }
 
 
@@ -173,8 +175,9 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
         if (err) {
             return console.log(err);
         }
-        console.log("Wrote " + fileName);
+        //console.log("Wrote " + fileName);
     });
+    return fileName;
 }
 
 NidiumIDL.prototype.createDict = function(outputPath, obj) {
@@ -184,8 +187,9 @@ NidiumIDL.prototype.createDict = function(outputPath, obj) {
         if (err) {
             return console.log(err);
         }
-        console.log("Wrote " + fileName);
+        //console.log("Wrote " + fileName);
     });
+    return fileName;
 }
 
 if (process.argv.length < 5) {
@@ -194,5 +198,6 @@ if (process.argv.length < 5) {
     var idl = new NidiumIDL(process.argv[2], process.argv[3]);
     idl.parse();
     //idl.printTree();
-    idl.generate(process.argv[4]);
+    var created = idl.generate(process.argv[4]);
+    console.log(created.join(" "));
 }
