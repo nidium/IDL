@@ -1,0 +1,304 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:46.813776
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSCanvas2DContext.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSCanvasGradient,
+    HeaderFile=JSCanvasGradient,
+    classname = CanvasGradient
+
+
+] interface CanvasGradient {
+
+
+    /* methods */
+
+    static void addColorStop(  float position,  DOMString color );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSCanvasRenderingContext2D,
+    HeaderFile=JSCanvasRenderingContext2D,
+    classname = CanvasRenderingContext2D
+
+
+] interface CanvasRenderingContext2D {
+
+    /* properties */
+
+    /*[static=True] static */  attribute float shadowOffsetX;
+
+    /*[static=True] static */  attribute float shadowOffsetY;
+
+    /*[static=True] static */  attribute DOMString fontFamily;
+
+    /*[static=True] static */  attribute float miterLimit;
+
+    /*[static=True] static */  attribute DOMString fontStyle;
+
+    /*[static=True] static */  attribute DOMString textAlign;
+
+    /*[static=True] static */  attribute boolean imageSmoothingEnabled;
+
+    /*[static=True] static */  attribute integer width;
+
+    /*[static=True] static */  attribute float globalAlpha;
+
+    /*[static=True] static */  attribute float shadowBlur;
+
+    /*[static=True] static */  attribute float lineWidth;
+
+    /*[static=True] static */  attribute DOMString fontFile;
+
+    /*[static=True] static */  attribute DOMString globalCompositionOperation;
+
+    /*[static=True] static */  attribute integer height;
+
+    /*[static=True] static */  attribute DOMString textBaseline;
+
+    /*[static=True] static */  attribute DOMString lineCap;
+
+    /*[static=True] static */  attribute DOMString shadowColor;
+
+    /*[static=True] static */  attribute float fontSize;
+
+    /*[static=True] static */  attribute float fontSkew;
+
+    /*[static=True] static */  attribute DOMString lineJoin;
+
+    /*[static=True] static */  attribute ( DOMString or CanvasGradient ) fillStyle;
+
+
+
+    /* methods */
+
+     void strokeText(  DOMString text,  integer x,  integer y,  integer maxWidth );
+
+     CanvasGLProgram attachFragmentShader(  DOMString glsl );
+
+     CanvasGradient createRadialGradient(  float x1,  float y1,  float r1,  float x2,  float y2,  float r2 );
+
+     CanvasPattern createPattern(  Image image,  DOMString mode );
+
+     void bezierCurveTo(  float cx1,  float cy1,  float cx2,  float cy2,  float x,  float y );
+
+     void fill(  );
+
+     void quadraticCurveTo(  float cx,  float cy,  float x,  float y );
+
+     object measureText(  DOMString text );
+
+     void scale(  float x,  float y );
+
+     void rect(  float x,  float y,  float width,  float height );
+
+     void fillText(  DOMString text,  integer x,  integer y,  integer maxWidth );
+
+     ImageData getImageData(  integer left,  integer top,  integer width,  integer heigth );
+
+     boolean isPointPath(  float x,  float y );
+
+     void transform(  float scaleX,  float skewX,  float skewY,  float scaleY,  float translateX,  float translateY, optional float rotate );
+
+     void arc(  float x,  float y,  float radius,  float start,  float end, optional boolean ccw );
+
+     void drawImage(  Image image,  integer x,  integer y, optional integer width, optional integer heigth );
+
+     ImageData createImageData(  integer x,  integer y );
+
+     void setTransform(  float scaleX,  float skewX,  float skewY,  float scaleY,  float translateX,  float translateY );
+
+     void iTransform(  float scaleX,  float skewX,  float skewY,  float scaleY,  float translateX,  float translateY );
+
+     void clip(  );
+
+     void translate(  float x,  float y );
+
+     void setVertexOffset(  integer vertex,  float x,  float y );
+
+     object breakText(  DOMString text,  float maxWidth );
+
+     void stroke(  );
+
+     void detachFragmentShader(  );
+
+     void rotate(  float angle );
+
+     void strokRect(  float x,  float y,  float width,  float height,  float rx,  float ry );
+
+     void fillRect(  float x1,  float y1,  float width,  float height, optional float rx, optional float ry );
+
+     void save(  );
+
+     void lineTo(  float x,  float y );
+
+     void arcTo(  integer x1,  integer y1,  integer x2,  integer y2,  float radius );
+
+     void moveTo(  float x,  float y );
+
+     void clearRect(  float x,  float y,  float width,  float height );
+
+     void beginPath(  );
+
+     void restore(  );
+
+     void putImageData(  ImageData image,  integer width,  integer heigth );
+
+     object getPathBounds(  );
+
+     void closePath(  );
+
+     CanvasGradient createLinearGradient(  float x1,  float y1,  float x2,  float y2 );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSCanvasGLProgram,
+    HeaderFile=JSCanvasGLProgram,
+    classname = CanvasGLProgram
+
+
+] interface CanvasGLProgram {
+
+
+    /* methods */
+
+    static void uniform3i(  integer location,  integer value1,  integer value2,  integer value3 );
+
+    static void uniform2i(  integer location,  integer value1,  integer value2,  integer value3 );
+
+    static void uniform2f(  integer location,  float value1,  float value2,  float value3 );
+
+    static void uniform1i(  integer location,  integer value1,  integer value2,  integer value3 );
+
+    static void uniform1f(  integer location,  float value1,  float value2,  float value3 );
+
+    static integer getUniformLocation(  DOMString location );
+
+    static void uniform3f(  integer location,  float value1,  float value2,  float value3 );
+
+    static void light(  float x,  float y,  float z );
+
+    static object getUniforms(  );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSImageData,
+    HeaderFile=JSImageData,
+    classname = ImageData
+
+
+] interface ImageData {
+
+    /* properties */
+
+     readonly attribute integer height;
+
+     readonly attribute ArrayBuffer data;
+
+     readonly attribute integer width;
+
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSCanvasPattern,
+    HeaderFile=JSCanvasPattern,
+    classname = CanvasPattern
+
+
+] interface CanvasPattern {
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:46.813776 */

@@ -1,0 +1,103 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:46.190535
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSWebSocketClient.cpp.py
+*/
+
+
+
+
+
+/* callbacks */
+
+    callback interface WebSocketServerOnmessageEventHandler {
+
+     void onmessage(  WebSocketServerClient client,  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSWebSocketServer,
+    HeaderFile=JSWebSocketServer,
+    classname = WebSocketServer
+
+
+] interface WebSocketServer {
+
+
+
+    /* events */
+
+    void onmessage(  WebSocketServerClient client,  WebSocketServerOnmessageEventHandler event);
+
+
+};
+
+
+
+
+/* callbacks */
+
+    callback interface WebSocketOnopenEventHandler {
+
+     void onopen(  WebSocketServerClient client );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSWebSocket,
+    HeaderFile=JSWebSocket,
+    classname = WebSocket
+
+
+] interface WebSocket {
+
+
+    /* methods */
+
+     integer? send(  ( DOMString or ArrayBuffer ) message );
+
+     WebSocket? ping(  DOMString url, optional DOMString protocol );
+
+     void close(  );
+
+
+
+    /* events */
+
+    void onopen(  WebSocketServerClient client);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:46.190535 */

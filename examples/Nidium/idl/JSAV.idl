@@ -1,0 +1,408 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:42.507856
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSAV.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JS_GLOBALAudioThread,
+    HeaderFile=JS_GLOBALAudioThread,
+    classname = _GLOBALAudioThread
+
+
+] interface _GLOBALAudioThread {
+
+
+    /* methods */
+
+    static void console(  );
+
+
+
+};
+
+
+
+/* anon_callbacks */
+
+    callback AudioNode_assignSetter_Callback = void(  DOMString key,  any value,  _GLOBALAudioThread scope );
+
+    callback AudioNode_assignSeek_Callback = void(  float postition,  _GLOBALAudioThread scope );
+
+    callback AudioNode_assignProcessor_Callback = void(  object frame,  _GLOBALAudioThread scope );
+
+    callback AudioNode_assignInit_Callback = void(  _GLOBALAudioThread scope );
+
+
+
+/* callbacks */
+
+    callback interface AudioNodePlayEventHandler {
+
+     void play(  any dummy );
+
+};
+
+    callback interface AudioNodePauseEventHandler {
+
+     void pause(  any dummy );
+
+};
+
+    callback interface AudioNodeEndEventHandler {
+
+     void end(  any dummy );
+
+};
+
+    callback interface AudioNodeErrorEventHandler {
+
+     void error(  object event );
+
+};
+
+    callback interface AudioNodeReadyEventHandler {
+
+     void ready(  any dummy );
+
+};
+
+    callback interface AudioNodeMessageEventHandler {
+
+     void message(  object event );
+
+};
+
+    callback interface AudioNodeBufferingEventHandler {
+
+     void buffering(  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSAudioNode,
+    HeaderFile=JSAudioNode,
+    classname = AudioNode
+
+
+] interface AudioNode {
+
+    /* properties */
+
+     readonly attribute integer bitrate;
+
+     readonly attribute AudioNodeLink[] input;
+
+     readonly attribute integer duration;
+
+      attribute integer position;
+
+     readonly attribute Object metadata;
+
+     readonly attribute DOMString type;
+
+     readonly attribute AudioNodeLink[] output;
+
+
+
+    /* methods */
+
+     any get(  DOMString key );
+
+     void assignSeek(  AudioNode_assignSeek_Callback cb );
+
+     void set(  DOMString key,  any value );
+
+     void pause(  );
+
+     void play(  );
+
+     void close(  );
+
+     void assignProcessor(  AudioNode_assignProcessor_Callback processor );
+
+     void stop(  );
+
+     void assignSetter(  AudioNode_assignSetter_Callback cb );
+
+     void assignInit(  AudioNode_assignInit_Callback cb );
+
+     void send(  );
+
+     void open(  DOMString src );
+
+
+
+    /* events */
+
+    void play(  any dummy);
+
+    void pause(  any dummy);
+
+    void end(  any dummy);
+
+    void error(  AudioNodeErrorEventHandler event);
+
+    void ready(  any dummy);
+
+    void message(  AudioNodeMessageEventHandler event);
+
+    void buffering(  AudioNodeBufferingEventHandler event);
+
+
+};
+
+
+
+
+/* callbacks */
+
+    callback interface VideoPlayEventHandler {
+
+     void play(  any dummy );
+
+};
+
+    callback interface VideoPauseEventHandler {
+
+     void pause(  any dummy );
+
+};
+
+    callback interface VideoEndEventHandler {
+
+     void end(  any dummy );
+
+};
+
+    callback interface VideoFrameEventHandler {
+
+     void frame(  Video video );
+
+};
+
+    callback interface VideoErrorEventHandler {
+
+     void error(  object event );
+
+};
+
+    callback interface VideoReadyEventHandler {
+
+     void ready(  any dummy );
+
+};
+
+    callback interface VideoBufferingEventHandler {
+
+     void buffering(  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  Canvas canvas ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSVideo,
+    HeaderFile=JSVideo,
+    classname = Video
+
+
+] interface Video {
+
+    /* properties */
+
+     readonly attribute Object metadata;
+
+      attribute integer position;
+
+     readonly attribute integer height;
+
+     readonly attribute integer width;
+
+     readonly attribute integer bitrate;
+
+     readonly attribute integer duration;
+
+
+
+    /* methods */
+
+     AudioNode? getAudioNode(  );
+
+
+
+    /* events */
+
+    void play(  any dummy);
+
+    void pause(  any dummy);
+
+    void end(  any dummy);
+
+    void frame(  Video video);
+
+    void error(  VideoErrorEventHandler event);
+
+    void ready(  any dummy);
+
+    void buffering(  VideoBufferingEventHandler event);
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSAudioNodeLink,
+    HeaderFile=JSAudioNodeLink,
+    classname = AudioNodeLink
+
+
+] interface AudioNodeLink {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSAudio,
+    HeaderFile=JSAudio,
+    classname = Audio
+
+
+] interface Audio {
+
+
+    /* methods */
+
+    static AudioContext getContext( optional integer buffersize, optional integer channels, optional integer sampleRate );
+
+
+
+};
+
+
+
+/* anon_callbacks */
+
+    callback AudioContext_run_Callback = void(  );
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSAudioContext,
+    HeaderFile=JSAudioContext,
+    classname = AudioContext
+
+
+] interface AudioContext {
+
+    /* properties */
+
+      attribute integer volume;
+
+     readonly attribute integer sampleRate;
+
+     readonly attribute integer bufferSize;
+
+     readonly attribute integer channels;
+
+
+
+    /* methods */
+
+     void run(  AudioContext_run_Callback cb );
+
+     void connect(  AudioNodeLink output,  AudioNodeLink input );
+
+     AudioNode createNode(  DOMString type,  integer inputChannels,  integer outputChannels );
+
+     void disconnect(  AudioNodeLink output,  AudioNodeLink input );
+
+    static void pFFT(  float[] xArray,  float[] yArray,  integer length,  integer dir );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:42.507856 */

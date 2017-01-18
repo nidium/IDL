@@ -1,0 +1,308 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:47.444631
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSCanvas.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSCanvasInherrit,
+    HeaderFile=JSCanvasInherrit,
+    classname = CanvasInherrit
+
+
+] interface CanvasInherrit {
+
+
+
+};
+
+
+
+
+/* callbacks */
+
+    callback interface CanvasLoadEventHandler {
+
+     void load(  object event );
+
+};
+
+    callback interface CanvasMousewheelEventHandler {
+
+     void mousewheel(  object event );
+
+};
+
+    callback interface CanvasDropEventHandler {
+
+     void drop(  object event );
+
+};
+
+    callback interface CanvasMouseupEventHandler {
+
+     void mouseup(  object event );
+
+};
+
+    callback interface CanvasMousemoveEventHandler {
+
+     void mousemove(  object event );
+
+};
+
+    callback interface CanvasDragendEventHandler {
+
+     void dragend(  object event );
+
+};
+
+    callback interface CanvasMousedownEventHandler {
+
+     void mousedown(  object event );
+
+};
+
+    callback interface CanvasResizeEventHandler {
+
+     void resize(  object event );
+
+};
+
+    callback interface CanvasDragstartEventHandler {
+
+     void dragstart(  CanvasDragendEventHandler event );
+
+};
+
+    callback interface CanvasDragoverEventHandler {
+
+     void dragover(  CanvasDropEventHandler event );
+
+};
+
+    callback interface CanvasDblclickEventHandler {
+
+     void dblclick(  object event );
+
+};
+
+    callback interface CanvasChangeEventHandler {
+
+     void change(  object obj );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  integer width, integer height,optional object options ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSCanvas,
+    HeaderFile=JSCanvas,
+    classname = Canvas
+
+
+] interface Canvas {
+
+    /* properties */
+
+      attribute DOMString id;
+
+     readonly attribute Canvas ctx;
+
+      attribute boolean visible;
+
+      attribute float marginLeft;
+
+     readonly attribute boolean __fixed;
+
+      attribute integer scrollTop;
+
+      attribute integer maxWidth;
+
+     readonly attribute integer clientTop;
+
+      attribute integer minWidth;
+
+     readonly attribute boolean __visible;
+
+     readonly attribute integer innerHeight;
+
+      attribute boolean fluidWidth;
+
+      attribute DOMString position;
+
+      attribute boolean staticLeft;
+
+     readonly attribute integer innerWidth;
+
+      attribute integer minHeight;
+
+      attribute float top;
+
+      attribute float marginRight;
+
+     readonly attribute boolean __outofbound;
+
+      attribute float coating;
+
+      attribute boolean staticRight;
+
+     readonly attribute float __top;
+
+      attribute float left;
+
+     readonly attribute CanvasInherrit inherrit;
+
+      attribute integer height;
+
+      attribute float opacity;
+
+     readonly attribute integer clientHeight;
+
+     readonly attribute integer clientWidth;
+
+      attribute integer scrollLeft;
+
+      attribute boolean staticTop;
+
+     readonly attribute integer clientLeft;
+
+      attribute boolean marginBottom;
+
+      attribute float right;
+
+      attribute boolean marginTop;
+
+     readonly attribute integer contentHeight;
+
+      attribute integer maxHeight;
+
+      attribute boolean overflow;
+
+      attribute boolean allowNegativeScroll;
+
+      attribute boolean staticBottom;
+
+     readonly attribute float __left;
+
+     readonly attribute integer contentWidth;
+
+      attribute float bottom;
+
+      attribute boolean fluidHeight;
+
+      attribute integer width;
+
+
+
+    /* methods */
+
+     ( CanvasRenderingContext2D? or WebGLRenderingContext? ) getContext(  DOMString mode );
+
+     Canvas? getPrevSibling(  );
+
+     void removeFromParent(  );
+
+     void bringToFront(  );
+
+     void setContext(  CanvasRenderingContext2D obj );
+
+     void cursor(  DOMString type );
+
+     void clear(  );
+
+     void setCoordinates(  integer left,  integer right );
+
+     void add(  Canvas child );
+
+     void setZoom(  float factor );
+
+     void show(  );
+
+     void insertBefore(  Canvas insert,  Canvas reference );
+
+     void setSize(  integer width,  integer height );
+
+     Canvas[] getChildren(  );
+
+     Canvas? getLastChild(  );
+
+     Canvas? getFirstChild(  );
+
+     void insertAfter(  Canvas insert,  Canvas reference );
+
+     void setScale(  integer x_pos,  integer y_pos );
+
+     Canvas? getParent(  );
+
+     void hide(  );
+
+     object getVisibleRect(  );
+
+     void sendToBack(  );
+
+     Canvas? getNextSibling(  );
+
+     void translate(  integer left,  integer right );
+
+
+
+    /* events */
+
+    void load(  CanvasLoadEventHandler event);
+
+    void mousewheel(  CanvasMousewheelEventHandler event);
+
+    void drop(  CanvasDropEventHandler event);
+
+    void mouseup(  CanvasMouseupEventHandler event);
+
+    void mousemove(  CanvasMousemoveEventHandler event);
+
+    void dragend(  CanvasDragendEventHandler event);
+
+    void mousedown(  CanvasMousedownEventHandler event);
+
+    void resize(  CanvasResizeEventHandler event);
+
+    void dragstart(  CanvasDragendEventHandler event);
+
+    void dragover(  CanvasDropEventHandler event);
+
+    void dblclick(  CanvasDblclickEventHandler event);
+
+    void change(  CanvasChangeEventHandler obj);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:47.444631 */

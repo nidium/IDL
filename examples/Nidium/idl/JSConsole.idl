@@ -1,0 +1,54 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:33.492318
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSConsole.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSConsole,
+    HeaderFile=JSConsole,
+    classname = Console
+
+
+] interface Console {
+
+
+    /* methods */
+
+    static void log( optional DOMString text );
+
+    static void clear(  );
+
+    static void error( optional DOMString text );
+
+    static void write( optional DOMString text );
+
+    static void hide(  );
+
+    static void warn( optional DOMString text );
+
+    static void show(  );
+
+    static void info( optional DOMString text );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:33.492318 */

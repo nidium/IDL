@@ -1,0 +1,59 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:37.211997
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSDocument.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSNidiumDocument,
+    HeaderFile=JSNidiumDocument,
+    classname = NidiumDocument
+
+
+] interface NidiumDocument {
+
+    /* properties */
+
+    /*[static=True] static */  attribute object stylesheet;
+
+
+
+    /* methods */
+
+    static NidiumDocument parse(  DOMString ast );
+
+    static void getPasteBuffer(  DOMString content );
+
+    static DOMString setPasteBuffer(  );
+
+    static Canvas? getCanvasById(  DOMString id );
+
+    static object getScreenData(  Canvas element );
+
+    static boolean loadFont(  DOMString name );
+
+    static void run(  DOMString location );
+
+    static void showFPS(  boolean show );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:37.211997 */

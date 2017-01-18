@@ -1,0 +1,50 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:34.786330
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSDB.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  ),
+
+
+    Exposed=module,
+
+
+
+    ImplementedAs=JSDB,
+    HeaderFile=JSDB,
+    classname = DB
+
+
+] interface DB {
+
+
+    /* methods */
+
+     void close(  );
+
+     void drop(  );
+
+     void set(  DOMString key,  any value );
+
+     void delete(  );
+
+     any get(  DOMString key );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:34.786330 */

@@ -1,0 +1,72 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:33.882429
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSDebug.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSglobal,
+    HeaderFile=JSglobal,
+    classname = global
+
+
+] interface global {
+
+    /* properties */
+
+     readonly attribute object Debug;
+
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSNidiumDebug,
+    HeaderFile=JSNidiumDebug,
+    classname = NidiumDebug
+
+
+] interface NidiumDebug {
+
+
+    /* methods */
+
+    static any[] serialize(  object obj );
+
+    static any unserialize(  ArrayBuffer arraybuf, optional unsigned long offset );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:33.882429 */

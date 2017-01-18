@@ -1,0 +1,92 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:52.066408
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSFile.cpp.py
+*/
+
+
+
+
+/* anon_callbacks */
+
+    callback File_open_Callback = void(  DOMString Error );
+
+    callback File_Callback = void(  DOMString err,  ( DOMString or ArrayBuffer ) buffer );
+
+    callback File_seek_Callback = void(  DOMString err );
+
+    callback File_read_Callback = void(  DOMString err,  DOMString buffer );
+
+    callback File_write_Callback = void(  DOMString err );
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  DOMString path,optional object options, File_Callback cb ),
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSFile,
+    HeaderFile=JSFile,
+    classname = File
+
+
+] interface File {
+
+    /* properties */
+
+     readonly attribute DOMString filesize;
+
+     readonly attribute DOMString filename;
+
+
+
+    /* methods */
+
+     void closeSync(  );
+
+     void rm(  );
+
+     boolean isDir(  );
+
+     ( DOMString or ArrayBuffer ) readSync( optional integer readSize );
+
+     void seek(  integer offset,  File_seek_Callback cb );
+
+     void listFiles(  );
+
+     void read(  integer bytes,  File_read_Callback cb );
+
+     void writeSync(  ( DOMString or ArrayBuffer ) buffer );
+
+     void write(  ( DOMString or ArrayBuffer ) buffer,  File_write_Callback cb );
+
+     void openSync(  );
+
+     void close(  );
+
+     void open(  DOMString mode,  File_open_Callback cb );
+
+     void seekSync(  integer offset );
+
+     void rmrf(  );
+
+    static DOMString readSync(  DOMString path, optional object options );
+
+    static DOMString read(  DOMString path, optional object options,  File_read_Callback cb );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:52.066408 */
