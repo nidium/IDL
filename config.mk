@@ -1,3 +1,6 @@
+# Copyright 2016 Nidium Inc. All rights reserved.
+# Use of this source code is governed by a MIT license
+# that can be found in the LICENSE file.
 
 BIN_CLANGFORMAT := $(shell command -v clang-format-3.5 2> /dev/null)
 BIN_NPM := $(shell command -v npm 2> /dev/null)

@@ -1,3 +1,9 @@
+/*
+   Copyright 2016 Nidium Inc. All rights reserved.
+   Use of this source code is governed by a MIT license
+   that can be found in the LICENSE file.
+*/
+
 var WebIDL2 = require("webidl2");
 var nunjucks = require('nunjucks');
 
@@ -188,7 +194,7 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
     obj.constructors = constructors;
     obj.operations = operations;
 
-    //console.log(obj.operations.foobar.lst[0]);
+    //console.log(obj);
     var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
     var fileNameHeader = outputPath + "/impl_" + obj.className + ".h";
     fileNames.push(fileNameHeader);
