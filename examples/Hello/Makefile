@@ -1,12 +1,17 @@
 INPUT_DIR=./idl
 OUTPUT_DIR=./cpp
-#PROJECT=$(INPUT_DIR)/Hello.idl
 
-TARGET=$(OUTPUT_DIR)/base_Hello.h
+INPUT_FILES = $(shell find $(INPUT_DIR) -type f -name '*.idl')
 
-all: $(TARGET)
+TARGETS = $(addprefix \
+			$(join $(OUTPUT_DIR)/, base_), \
+			$(addsuffix .h,  $(basename \
+								$(notdir $(INPUT_FILES) ) \
+							) \
+			) \
+		)
 
+all: $(TARGETS)
 
 include ../common.mk
-
 
