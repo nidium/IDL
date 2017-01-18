@@ -1,6 +1,7 @@
 NODE=nodejs
 NPM=npm
-CLANGFORMAT=clang-format-3.5 -style=Mozilla
+CLANGFORMAT=clang-format-3.5 -style=file
+
 
 PROJECT=./examples/Hello.idl
 OUTPUT_DIR=./output/Hello
