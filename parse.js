@@ -113,7 +113,7 @@ NidiumIDL.prototype.printTree = function() {
     console.log(util.inspect(this.tree, {colors: true, depth: 16}));
 }
 
-NidiumIDL.prototype.generate = function(outputPath) {
+NidiumIDL.prototype.generate = function(outputPath, prefix) {
     var created_files = [];
     for (var i = 0; i < this.tree.length; i++) {
         var obj = this.tree[i];
@@ -136,10 +136,10 @@ NidiumIDL.prototype.generate = function(outputPath) {
         };
         switch(obj.type) {
             case 'interface':
-                created_files = created_files.concat(this.createInterface(outputPath, obj));
+                created_files = created_files.concat(this.createInterface(outputPath, obj, prefix));
                 break;
             case 'dictionary':
-                create_files = created_files.concat(this.createDict(outputPath, obj));
+                create_files = created_files.concat(this.createDict(outputPath, obj, prefix));
                 break;
         }
     }
@@ -148,7 +148,7 @@ NidiumIDL.prototype.generate = function(outputPath) {
 }
 
 
-NidiumIDL.prototype.createInterface = function(outputPath, obj)
+NidiumIDL.prototype.createInterface = function(outputPath, obj, prefix)
 {
     /*
         Scan for constructor
@@ -193,10 +193,11 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
 
     obj.constructors = constructors;
     obj.operations = operations;
+    obj.prefix = prefix;
 
     //console.log(obj);
     var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
-    var fileNameHeader = outputPath + "/impl_" + obj.className + ".h";
+    var fileNameHeader = outputPath + "/" + prefix + obj.className + ".h";
     fileNames.push(fileNameHeader);
     fs.writeFile(fileNameHeader, interfaceHeader, function(err) {
         if (err) {
@@ -204,7 +205,7 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
         }
     });
     var interfaceCode = this.env.render('impl_class.tpl.cpp', obj);
-    var fileNameCode = outputPath + "/impl_" + obj.className + ".cpp";
+    var fileNameCode = outputPath + "/" + prefix + obj.className + ".cpp";
     fileNames.push(fileNameCode);
     fs.writeFile(fileNameCode, interfaceCode, function(err) {
         if (err) {
@@ -215,11 +216,11 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj)
     return fileNames;
 }
 
-NidiumIDL.prototype.createDict = function(outputPath, obj) {
+NidiumIDL.prototype.createDict = function(outputPath, obj, prefix) {
     var fileNames = [];
     //console.log(obj);
     var dictHeader = this.env.render('dict_class.tpl.h', obj);
-    var fileName = outputPath + "/dict_" + obj.className + ".h";
+    var fileName = outputPath + "/" + prefix + obj.className + ".h";
     fileNames.push(fileName);
     fs.writeFile(fileName, dictHeader, function(err) {
         if (err) {
@@ -230,12 +231,12 @@ NidiumIDL.prototype.createDict = function(outputPath, obj) {
     return fileNames;
 }
 
-if (process.argv.length < 5) {
-    console.log("Usage : " + process.argv[0] + " " + process.argv[1] + " idlfile templatepath outputpath\n");
+if (process.argv.length < 6) {
+    console.log("Usage : " + process.argv[0] + " " + process.argv[1] + " idlfile templatepath outputpath prefix\n");
 } else {
     var idl = new NidiumIDL(process.argv[2], process.argv[3]);
     idl.parse();
     //idl.printTree();
-    var created = idl.generate(process.argv[4]);
+    var created = idl.generate(process.argv[4], process.argv[5]);
     console.log(created.join(" "));
 }

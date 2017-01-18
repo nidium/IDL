@@ -7,7 +7,7 @@
 {% import 'defs.tpl' as defs %}
 
 #include <Binding/ClassMapper.h>
-#include "{{ className }}.h"
+#include "{{ prefix }}{{ className }}.h"
 
 namespace Nidium {
 namespace Binding {
@@ -16,7 +16,7 @@ namespace Binding {
 
 {% if ctor %}
     // {{ '{{{' }} Start Constructor
-    {{ className }} *{{ className }}::Constructor(JSContext *cx, JS::CallArgs &args,
+    {{ prefix }}{{ className }} *{{ prefix }}{{ className }}::Constructor(JSContext *cx, JS::CallArgs &args,
         JS::HandleObject obj)
     {
         unsigned argc = args.length();
@@ -39,14 +39,14 @@ namespace Binding {
                     {% endfor %}
                     /* End of arguments conversion */
 
-                    {{ className }} *n_{{ className }} = new {{ className }}(
+                    {{ prefix }}{{ className }} *n_{{ prefix }}{{ className }} = new {{ prefix }}{{ className }}(
                         {% for i in range(0, op.arguments|length) %}
                             inArg_{{ i }}{{ ' ' if loop.last else ', ' }}
                         {% endfor %}
                     );
-                    n_{{ className }}->root();
+                    n_{{ prefix }}{{ className }}->root();
 
-                    return n_{{ className }};
+                    return n_{{ prefix }}{{ className }};
                     break;
                 }
             {% endfor %}
@@ -66,14 +66,14 @@ namespace Binding {
 
 {% if normal_methods|length > 0 %}
     // {{ '{{{'  }} Start Operations
-    JSFunctionSpec * {{ className }}::ListMethods()
+    JSFunctionSpec * {{ prefix }}{{ className }}::ListMethods()
     {
         static JSFunctionSpec funcs[] = {
         {% for attrName, attr in normal_methods %}
             {% if hasAttr(attr.extAttrs, 'Alias') %}
-                CLASSMAPPER_FN_ALIAS({{ className }}, {{ attrName }}, {{ attr['maxArgs'] }}, {{ hasAttr( attr.extAttrs, 'Alias') }}),
+                CLASSMAPPER_FN_ALIAS({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }}, {{ hasAttr( attr.extAttrs, 'Alias') }}),
             {% endif %}
-            CLASSMAPPER_FN({{ className }}, {{ attrName }}, {{ attr['maxArgs'] }} ),
+            CLASSMAPPER_FN({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }} ),
         {% endfor %}
 
         JS_FS_END
@@ -85,14 +85,14 @@ namespace Binding {
 
 {% if static_methods|length > 0 %}
     // {{ '{{{'  }} Start Operations
-    JSFunctionSpec * {{ className }}::ListStaticMethods()
+    JSFunctionSpec * {{ prefix }}{{ className }}::ListStaticMethods()
     {
         static JSFunctionSpec funcs[] = {
         {% for attrName, attr in static_methods %}
             {% if hasAttr(attr.extAttrs, 'Alias') %}
-                CLASSMAPPER_FN_ALIAS({{ className }}, {{ attrName }}, {{ attr['maxArgs'] }}, {{ hasAttr(attr.extAttrs, 'Alias') }}),
+                CLASSMAPPER_FN_ALIAS({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }}, {{ hasAttr(attr.extAttrs, 'Alias') }}),
             {% endif %}
-            CLASSMAPPER_FN({{ className }}, {{ attrName }}, {{ attr['maxArgs'] }} ),
+            CLASSMAPPER_FN({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }} ),
         {% endfor %}
 
         JS_FS_END
@@ -103,7 +103,7 @@ namespace Binding {
 
 
     {% for attrName, attr in operations %}
-        bool {{ className }}::JS_{{ attrName }}(JSContext *cx, JS::CallArgs &args)
+        bool {{ prefix }}{{ className }}::JS_{{ attrName }}(JSContext *cx, JS::CallArgs &args)
         {
             unsigned argc = args.length();
             unsigned argcMin = (({{ attr['maxArgs'] }} > argc) ? (argc) : ({{ attr['maxArgs'] }}));
@@ -160,15 +160,15 @@ namespace Binding {
 
 {% if members.length > 0 %}
     // {{ '{{{' }} Start Members
-    JSPropertySpec *{{ className }}::ListProperties()
+    JSPropertySpec *{{ prefix }}{{ className }}::ListProperties()
     {
         static JSPropertySpec props[] = {
         {% for attr in members %}
             {# TODO: ONLY-SETTER #}
             {% if not attr.readonly %}
-                CLASSMAPPER_PROP_GS({{ className }}, {{ attr.name }}),
+                CLASSMAPPER_PROP_GS({{ prefix }}{{ className }}, {{ attr.name }}),
             {% else %}
-                CLASSMAPPER_PROP_G({{ className }}, {{ attr.name }}),
+                CLASSMAPPER_PROP_G({{ prefix }}{{ className }}, {{ attr.name }}),
             {% endif %}
         {% endfor %}
             JS_PS_END
@@ -180,7 +180,7 @@ namespace Binding {
 
     {% for attr in members %}
         {% if not attr.readonly %}
-            bool {{ className }}::JSSetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
+            bool {{ prefix }}{{ className }}::JSSetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
             {
                 {# TODO: uniontype#}
                 {{ attr.idlType }}
@@ -190,7 +190,7 @@ namespace Binding {
             }
         {% endif %}
 
-        bool {{ className }}::JSGetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
+        bool {{ prefix }}{{ className }}::JSGetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
         {
                 {% set need = attr.idlType.idlType %}
 
@@ -217,20 +217,20 @@ namespace Binding {
 {% endif %}
 
 {% if hasAttr(extAttrs, 'exposed') %}
-    void {{ className }}::RegisterObject(JSContext *cx)
+    void {{ prefix }}{{ className }}::RegisterObject(JSContext *cx)
     {
         {% if exposed == 'class' %}
-             {{ className }}::ExposeClass<{{ constructors['maxArgs'] }}>(cx, "{{ name }}");
+             {{ prefix }}{{ className }}::ExposeClass<{{ constructors['maxArgs'] }}>(cx, "{{ name }}");
              {# TODO: HAS_RESERVED_SLOTS #}
         {% elif exposed == 'module' %}
-            JSModules::RegisterEmbedded("{{ className }}", {{ className }}::RegisterModule);
+            JSModules::RegisterEmbedded("{{ className }}", {{ prefix }}{{ className }}::RegisterModule);
         {% endif %}
     }
 
     {% if exposed == 'module' %}
-        JSObject *{{ className }}::RegisterModule(JSContext *cx)
+        JSObject *{{ prefix }}{{ className }}::RegisterModule(JSContext *cx)
         {
-            JS::RootedObject exports(cx, {{ className }}::ExposeObject(cx, "{{ name }}"));
+            JS::RootedObject exports(cx, {{ prefix }}{{ className }}::ExposeObject(cx, "{{ name }}"));
 
             return exports;
         }

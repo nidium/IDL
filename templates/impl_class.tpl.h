@@ -7,8 +7,8 @@
 #include <Binding/JSUtils.h>
 {% import "defs.tpl" as defs %}
 
-#ifndef binding_{{ className }}_h__
-#define binding_{{ className }}_h__
+#ifndef binding_{{ prefix }}{{ className }}_h__
+#define binding_{{ prefix }}{{ className }}_h__
 
 {% set header = hasAttr(extAttrs, 'headerfile') %}
 {% if header %}
@@ -77,23 +77,23 @@ private:
 // {{ '}}}' }}
 */
 
-class {{ className }} : public ClassMapper{% if hasAttr(extAttrs, 'Events') %}
+class {{ prefix }}{{ className }} : public ClassMapper{% if hasAttr(extAttrs, 'Events') %}
                                              WithEvents
-                                             {% endif %}<{{ className }}>, public {{ className }}_Base
+                                             {% endif %}<{{ prefix }}{{ className }}>, public {{ className }}_Base
 {
 public:
 {% if ctor %}
     {% for constructor in constructors.lst %}
-             {{ className }}( {{ defs.arglst(constructor.arguments) }})
+             {{ prefix }}{{ className }}( {{ defs.arglst(constructor.arguments) }})
                 : {{ className }}_Base( {{ defs.argcall(constructor.arguments) }} ) { }
        {% else %}
             {{ className }}()::{{className}}_Base(){}
    {% endfor %}
 {% endif %}
 
-    ~{{ className }}();
+    ~{{ prefix }}{{ className }}();
     {% if ctor %}
-        static {{ className }} * Constructor(JSContext *cx, JS::CallArgs &args,
+        static {{ prefix }}{{ className }} * Constructor(JSContext *cx, JS::CallArgs &args,
             JS::HandleObject obj);
         static void RegisterObject(JSContext *cx);
     {% endif %}

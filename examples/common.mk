@@ -13,9 +13,9 @@ $(OUTPUT_DIR):
 	mkdir -p $(OUTPUT_DIR)
 
 $(OUTPUT_DIR)/$(IMPL_PREFIX)%.h: $(INPUT_DIR)/%.idl $(PARSE) $(TEMPLATES) $(OUTPUT_DIR) ../_clang-format
-	$(eval CMD = $(BIN_NODEJS) $(PARSE) $< $(TEMPLATE_DIR) $(OUTPUT_DIR))
+	@$(eval CMD = $(BIN_NODEJS) $(PARSE) $< $(TEMPLATE_DIR) $(OUTPUT_DIR) $(IMPL_PREFIX))
+	@$(eval CREATED = $(shell $(CMD)))
 	@echo "$(CMD)"
-	$(eval CREATED = $(shell $(CMD)))
 	$(BIN_CLANGFORMAT) -style=file -i $(CREATED)
 
 .PHONY: clean

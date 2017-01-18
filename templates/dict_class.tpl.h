@@ -13,8 +13,8 @@
 namespace Nidium {
 namespace Binding {
 
-// {{ '{{{' }} Dict_{{ name }}
-class Dict_{{ name }} : public Dict
+// {{ '{{{' }} Dict_{{prefix}}{{ name }}
+class Dict_{{prefix}}{{ name }} : public Dict
 {
 public:
     Dict_{{ name }}() {
