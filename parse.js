@@ -113,18 +113,34 @@ NidiumIDL.prototype.printTree = function() {
     console.log(util.inspect(this.tree, {colors: true, depth: 16}));
 }
 
+
 NidiumIDL.prototype.generate = function(outputPath, prefix) {
     var created_files = [];
     for (var i = 0; i < this.tree.length; i++) {
         var obj = this.tree[i];
-        obj.getMethods = function(operations, thatAreStatic) {
-            statics = []
-            for (var j = 0; j <operations.length; j++){
-                if (operations[j].static == thatAreStatic) {
-                    statics.push(operations[j]);
+        obj.getProperties = function(members) {
+            var properties = []
+            if ( members ) {
+                for (var j = 0; j < members.length; j++){
+                    if (members[j].type == 'attribute' ) {
+                        properties.push(members[j]);
+                    }
                 }
             }
-            return statics; 
+            return properties;
+        };
+
+        obj.getMethods = function(members, thatAreStatic) {
+            var methods = []
+            if ( members ) {
+                for (var j = 0; j < members.length; j++){
+                    var operation = members[j];
+                    if (operation.type == 'operation' && operation.static == thatAreStatic ) {
+                        methods.push(operation);
+                    }
+                }
+            }
+            return methods;
         };
         obj.hasAttr = function(extAttrs, key) {
             for( var j = 0; j < extAttrs.length; j++) {
@@ -195,7 +211,8 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj, prefix)
     obj.operations = operations;
     obj.prefix = prefix;
 
-    //console.log(obj);
+    console.log(obj);
+    //console.log(obj.operations['foobar'].lst[0].idlType);
     var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
     var fileNameHeader = outputPath + "/" + prefix + obj.className + ".h";
     fileNames.push(fileNameHeader);

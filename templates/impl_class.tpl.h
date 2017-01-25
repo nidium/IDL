@@ -7,6 +7,10 @@
 #include <Binding/JSUtils.h>
 {% import "defs.tpl" as defs %}
 
+{% set static_methods = getMethods(members, true) %}
+{% set normal_methods = getMethods(members, false) %}
+{% set properties = getProperties(members) %}
+
 #ifndef binding_{{ prefix }}{{ className }}_h__
 #define binding_{{ prefix }}{{ className }}_h__
 
@@ -20,16 +24,16 @@
 namespace Nidium {
 namespace Binding {
 
-// {{ '{{{' }} fake {{ className }}
 
-/*
-//This is a model of our imaginary base class '{{ className }}'
+// {{ '{{{' }} fake {{ className }}_Base
+#if 0
+//This is a model of our imaginary base class '{{ className }}_Base'
 
 class {{ className }}_Base
 {
 public:
+    // Constructor
     {% if ctor %}
-        // Constructor
         {% for constructor in constructors.lst %}
             {{ className }}_Base({{ defs.arglst(constructor.arguments) }});
         {% endfor %}
@@ -38,18 +42,25 @@ public:
     {% endif %}
     ~{{ className }}_Base();
 protected:
-    {% if operations|length > 0 %}
-         // Methods
-        {% for attrName, attr in operations %}
-             {% for op in attr.lst %}
-                 {{ op.return_type.idlType|ctype }} {{ op.name }}({{ defs.arglst(op.arguments) }});
+    // Methods
+    {% for method_list in [normal_methods, static_methods ] %}
+        {% for op in method_list %}
+             {% if operations[op.name].lst|length > 1 %}
+                 // Overloading {{ op.name}}-s methods
+             {% endif %}
+             {% for attr in operations[op.name].lst %}
+                {% if attr.static %}static {% endif %}
+                {# if op.idlType.idlType|ctype != 'void' #}
+                    {{ op.idlType.idlType|ctype }}
+                {#endif #}
+                {{ attr.return_type.idlType|ctype }} {{ attr.name }}({{ defs.arglst(attr.arguments) }});
              {% endfor %}
         {% endfor %}
-    {% endif %}
-    {% if members.length > 0 %}
-        // Properties
+    {% endfor %}
+    // Properties
+    {% if properties|length > 0 %}
         {# TODO Setter only #}
-        {% for attr in members %}
+        {% for attr in properties %}
             {% if not attr.readonly %}
                 bool set_{{ attr.name }}({{ attr.idlType.idlType|ctype }} {{attr.name }});
             {% endif %}
@@ -62,7 +73,7 @@ protected:
     {% endif %}
 private:
     // Properties
-    {% for attr in members %}
+    {% for attr in properties %}
         {% if attr.idlType.idlType != 'UNKNOWN' %}
             {{ attr.idlType.idlType|ctype }} {{ attr.name }};
         {% else %}
@@ -70,8 +81,8 @@ private:
         {% endif %}
     {% endfor %}
 };
+#endif
 // {{ '}}}' }}
-*/
 
 class {{ prefix }}{{ className }} : public ClassMapper{% if hasAttr(extAttrs, 'Events') %}
                                              WithEvents
@@ -89,36 +100,44 @@ public:
 
     ~{{ prefix }}{{ className }}();
     {% if ctor %}
+        //Constructor
         static {{ prefix }}{{ className }} * Constructor(JSContext *cx, JS::CallArgs &args,
             JS::HandleObject obj);
-        static void RegisterObject(JSContext *cx);
     {% endif %}
-    {% set static_methods = getMethods(operations, true) %}
-    {% set normal_methods = getMethods(operations, false) %}
-    {% if normal_methods.lenght > 0 %}
+    //Listings
+    {% if normal_methods|length > 0 %}
         static JSFunctionSpec * ListMethods();
     {% endif %}
-    {% if static_methods.lenght > 0 %}
+    {% if static_methods|length > 0 %}
         static JSFunctionSpec * ListStaticMethods();
     {% endif %}
-    {% if members.length > 0 %}
-        static JSPropertySpec *ListProperties();
+    {% if properties|length > 0 %}
+        static JSPropertySpec * ListProperties();
     {% endif %}
+    //Registration
     {% if hasAttr(extAttrs, 'exposed') %}
         static void RegisterObject(JSContext *cx);
     {% endif %}
 protected:
-    {% for attrName, attr in operations %}
-        NIDIUM_DECL_JSCALL{%if attr.static%}STATIC{% endif%}({{ attrName }});
+    //Methods
+    {% for attr in static_methods %}
+        {# this is one js entry point, no method overloading #}
+        NIDIUM_DECL_JSCALL_STATIC({{ attr.name }});
+    {% endfor %}
+    {% for attr in normal_methods %}
+        {# this is one js entry point, no method overloading #}
+        NIDIUM_DECL_JSCALL({{ attr.name }});
     {% endfor %}
     {# TODO ONLY-SETTER #}
-    {% for attr in members %}
+    //Properties
+    {% for attr in properties %}
         {% if not attr.readonly %}
             NIDIUM_DECL_JSGETTERSETTER({{ attr.name }});
         {% else %}
             NIDIUM_DECL_JSGETTER({{ attr.name }});
         {% endif %}
     {% endfor %}
+    //Registration
     {% if hasAttr(extAttrs, 'exposed') == 'module' %}
         static JSObject *RegisterModule(JSContext *cx);
     {% endif %}

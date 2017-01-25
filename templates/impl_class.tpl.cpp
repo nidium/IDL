@@ -6,6 +6,10 @@
 
 {% import 'defs.tpl' as defs %}
 
+{% set static_methods = getMethods(members, true) %}
+{% set normal_methods = getMethods(members, false ) %}
+{% set properties = getProperties(members) %}
+
 #include <Binding/ClassMapper.h>
 #include "{{ prefix }}{{ className }}.h"
 
@@ -20,13 +24,13 @@ namespace Binding {
         JS::HandleObject obj)
     {
         unsigned argc = args.length();
-        unsigned argcMin = (({{ constructors['maxArgs'] }} > argc) ? (argc) : ({{ constructors['maxArgs'] }}));
+        unsigned argcMin = (({{ constructors.maxArgs }} > argc) ? (argc) : ({{ constructors.maxArgs }}));
 
         switch (argcMin) {
             {% for op in constructors.lst %}
                 case {{ op.arguments|length }}:
                 {
-                    /* Start arguments conversion */
+                    /* Start argument conversion */
                     {% for arg in op.arguments %}
                         /* Handle argument #{{ loop.index0 }} of type "{{ arg.idlType.idlType }}" */
                         {% if not arg.idlType.nullable %}
@@ -37,7 +41,7 @@ namespace Binding {
                         {% endif %}
                         {{ defs.jsval2c('args[' ~ loop.index0 ~ ']', arg.idlType.idlType, 'inArg_' ~  loop.index0 , 'nullptr') }}
                     {% endfor %}
-                    /* End of arguments conversion */
+                    /* End of argument conversion */
 
                     {{ prefix }}{{ className }} *n_{{ prefix }}{{ className }} = new {{ prefix }}{{ className }}(
                         {% for i in range(0, op.arguments|length) %}
@@ -61,109 +65,139 @@ namespace Binding {
     // {{ '}}}' }} End Constructor
 {% endif %}
 
-{% set static_methods = getMethods(operations, true) %}
-{% set normal_methods = getMethods(operations, false ) %}
+{% if (normal_methods|length + static_methods|length) > 0 %}
+    // {{ '{{{' }} Methods
+    {% if normal_methods|length > 0 %}
+        // List normal methods
+        JSFunctionSpec * {{ prefix }}{{ className }}::ListMethods()
+        {
+            static JSFunctionSpec funcs[] = {
+            {% for attr in normal_methods %}
+                {% set maxArgs = operations[attr.name].maxArgs %}
+                {% if hasAttr(attr.extAttrs, 'Alias') %}
+                    CLASSMAPPER_FN_ALIAS({{ prefix }}{{ className }}, {{ attr.name }}, {{ maxArgs }}, {{ hasAttr( attr.extAttrs, 'Alias') }}),
+                {% endif %}
+                CLASSMAPPER_FN({{ prefix }}{{ className }}, {{ attr.name }}, {{ maxArgs }} ),
+            {% endfor %}
 
-{% if normal_methods|length > 0 %}
-    // {{ '{{{'  }} Start Operations
-    JSFunctionSpec * {{ prefix }}{{ className }}::ListMethods()
-    {
-        static JSFunctionSpec funcs[] = {
-        {% for attrName, attr in normal_methods %}
-            {% if hasAttr(attr.extAttrs, 'Alias') %}
-                CLASSMAPPER_FN_ALIAS({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }}, {{ hasAttr( attr.extAttrs, 'Alias') }}),
-            {% endif %}
-            CLASSMAPPER_FN({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }} ),
-        {% endfor %}
+            JS_FS_END
+            };
 
-        JS_FS_END
-        };
-
-        return funcs;
-    }
+            return funcs;
+        }
     {% endif %}
 
-{% if static_methods|length > 0 %}
-    // {{ '{{{'  }} Start Operations
-    JSFunctionSpec * {{ prefix }}{{ className }}::ListStaticMethods()
-    {
-        static JSFunctionSpec funcs[] = {
-        {% for attrName, attr in static_methods %}
-            {% if hasAttr(attr.extAttrs, 'Alias') %}
-                CLASSMAPPER_FN_ALIAS({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }}, {{ hasAttr(attr.extAttrs, 'Alias') }}),
-            {% endif %}
-            CLASSMAPPER_FN({{ prefix }}{{ className }}, {{ attrName }}, {{ attr['maxArgs'] }} ),
-        {% endfor %}
-
-        JS_FS_END
-        };
-
-        return funcs;
-    }
-
-
-    {% for attrName, attr in operations %}
-        bool {{ prefix }}{{ className }}::JS_{{ attrName }}(JSContext *cx, JS::CallArgs &args)
+    {% if static_methods|length > 0 %}
+        // List static methods
+        JSFunctionSpec * {{ prefix }}{{ className }}::ListStaticMethods()
         {
-            unsigned argc = args.length();
-            unsigned argcMin = (({{ attr['maxArgs'] }} > argc) ? (argc) : ({{ attr['maxArgs'] }}));
-            {#TODO: optimize when argcMin == 0 #}
-            switch (argcMin) {
-                {% for op in attr.lst %}
-                    case {{ op.arguments|length }}:
-                    {
-                        /* Start arguments conversion */
-                        {% for arg in op.arguments %}
-                            /* Handle argument #{{ loop.index0 }} of type "{{ arg.idlType.idlType }}" */
-                            {% if not arg.idlType.nullable %}
-                                if (args[{{ loop.index0 }}].isNull()) {
+            static JSFunctionSpec funcs[] = {
+            {% for attr in static_methods %}
+                {% set maxArgs = operations[attr.name].maxArgs %}
+                {% if hasAttr(attr.extAttrs, 'Alias') %}
+                    CLASSMAPPER_FN_ALIAS({{ prefix }}{{ className }}, {{ attr.name }}, {{ maxArgs }}, {{ hasAttr(attr.extAttrs, 'Alias') }}),
+                {% endif %}
+                {% if attr.static %}
+                    CLASSMAPPER_FN_STATIC({{ prefix }}{{ className }}, {{ attr.name }}, {{ maxArgs }} ),
+                {% else %}
+                    CLASSMAPPER_FN({{ prefix }}{{ className }}, {{ attr.name }}, {{ maxArgs }} ),
+                {% endif %}
+            {% endfor %}
+
+            JS_FS_END
+            };
+
+            return funcs;
+        }
+    {% endif %}
+
+    // Methods implementation
+    {% for method_list in [normal_methods, static_methods ] %}
+        {% for attr in method_list %}
+            {% set maxArgs = operations[attr.name].maxArgs %}
+            // {{ '{{{' }} Start method {{ attr.name }}
+            {% if attr.static %}
+                bool {{ prefix }}{{ className }}::JSStatic_{{ attr.name }}(JSContext *cx, JS::CallArgs &args)
+            {% else %}
+                bool {{ prefix }}{{ className }}::JS_{{ attr.name }}(JSContext *cx, JS::CallArgs &args)
+            {%endif %}
+            {
+                unsigned argc = args.length();
+                unsigned argcMin = (({{maxArgs }} > argc) ? (argc) : ({{ maxArgs }}));
+                {#TODO: optimize when argcMin == 0 #}
+                switch (argcMin) {
+                    {% for op in operations[attr.name].lst %}
+                        case {{ op.arguments|length }}:
+                        {
+                            /* Start argument conversion */
+                            {% for arg in op.arguments %}
+                                /* Handle argument #{{ loop.index0 }} of type "{{ arg.idlType.idlType }}" */
+                                {% if not arg.idlType.nullable %}
+                                    if (args[{{ loop.index0 }}].isNull()) {
+                                        JS_ReportError(cx, "TypeError");
+                                        return false;
+                                    }
+                                {% endif %}
+                                {# TODO union-types  #}
+                                {% if arg.idlType.idlType  != 'UNKNOWN' %}
+                                    {{ defs.jsval2c('args[' ~ loop.index0 ~ ']', arg.idlType.idlType, 'inArg_' ~ loop.index0) }}
+                                {% else %}
+                                    {{ defs.jsval2c('args[' ~ loop.index0 ~ ']', arg.type, 'inArg_' ~ loop.index0) }}
+                                {% endif %}
+                            {% endfor %}
+
+                            /* End of argument conversion */
+                            {# if op.idlType.idlType|ctype != 'void' #}
+                                {{ op.idlType.idlType|ctype }} _opret =
+                            {#endif #}
+                            {% if attr.static %}{{ prefix }}{{ className }}::{% else %}this->{% endif %}
+                            {{ attr.name }}(
+                            {% for i in range(0, op.arguments|length) %}
+                                inArg_{{ i }}{{ ' ' if loop.last else ', ' }}
+                            {% endfor %}
+                            );
+                            {% set need = attr.idlType.idlType %}
+                            {% if need == 'cstring' %}
+                                JS::RootedString jstr0(cx, JS_NewStringCopyZ(cx, _opret));
+                                args.rval().setString(jstr);
+                            {% elif need == 'boolean' %}
+                                args.rval().setBoolean(_opret);
+                            {% elif attr.idlType.idlType == 'unknown' %}
+                                {# TODO InterfaceType {{ need }}  {{ need.idlType}} #}
+                            {% else %}
+                                JS::RootedValue jval(cx);
+                                if (!JS::{{ need | convert }}(cx, jval, &_opret)) {
                                     JS_ReportError(cx, "TypeError");
                                     return false;
                                 }
+                               args.rval().set(jval);
                             {% endif %}
-                            {# TODO union-types  #}
-                            {% if arg.idlType.idlType  != 'UNKNOWN' %}
-                                {{ defs.jsval2c('args[' ~ loop.index0 ~ ']', arg.idlType.idlType, 'inArg_' ~ loop.index0) }}
-                            {% else %}
-                                {{ defs.jsval2c('args[' ~ loop.index0 ~ ']', arg.type, 'inArg_' ~ loop.index0) }}
-                            {% endif %}
-                        {% endfor %}
 
-                        /* End of arguments conversion */
-                        {% if op.return.idlType.idlType|ctype != 'void' %}
-                            {{ op.return.idlType.idlType|ctype }} _opret =
-                        {%endif %}
-                        this->{{ attrName }}(
-                        {% for i in range(0, op.arguments|length) %}
-                            inArg_{{ i }}{{ ' ' if loop.last else ', ' }}
-                        {% endfor %}
-                        );
-                        {% if op.return.idlType.idlType != 'void' %}
-                           args.rval().set{{ op.return.idlType.idlType|jsvaltype|capitalize }}(_opret);
-                        {% endif %}
-
+                            break;
+                        }
+                    {% endfor %}
+                    default:
+                        JS_ReportError(cx, "TypeError: wrong number of arguments");
+                        return false;
                         break;
-                    }
-                {% endfor %}
-                default:
-                    JS_ReportError(cx, "TypeError: wrong number of arguments");
-                    return false;
-                    break;
-            }
+                }
 
-            return true;
-        }
+                return true;
+            }
+            // {{ '}}}' }} End method {{ attr.name }}
+        {% endfor %}
     {% endfor %}
 
-    // {{ '}}}' }} End Operations
+    // {{ '}}}' }} End Methods
     {% endif %}
 
-{% if members.length > 0 %}
-    // {{ '{{{' }} Start Members
+{% if properties|length > 0 %}
+    // {{ '{{{' }} Properties
+    // List properties
     JSPropertySpec *{{ prefix }}{{ className }}::ListProperties()
     {
         static JSPropertySpec props[] = {
-        {% for attr in members %}
+        {% for attr in properties %}
             {# TODO: ONLY-SETTER #}
             {% if not attr.readonly %}
                 CLASSMAPPER_PROP_GS({{ prefix }}{{ className }}, {{ attr.name }}),
@@ -177,9 +211,10 @@ namespace Binding {
         return props;
     }
 
-
-    {% for attr in members %}
+    {% for attr in properties %}
+        // {{ '{{{' }} Start property {{ attr.name }}
         {% if not attr.readonly %}
+            // Setter {{ attr.name }}
             bool {{ prefix }}{{ className }}::JSSetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
             {
                 {# TODO: uniontype attr.idlType #}
@@ -188,7 +223,7 @@ namespace Binding {
                 return this->set_{{ attr.name }}(inArg_0);
             }
         {% endif %}
-
+        // Getter {{ attr.name }}
         bool {{ prefix }}{{ className }}::JSGetter_{{ attr.name }}(JSContext *cx, JS::MutableHandleValue vp)
         {
                 {% set need = attr.idlType.idlType %}
@@ -213,16 +248,17 @@ namespace Binding {
 
             return true;
         }
+        // {{ '}}}' }} End property {{ attr.name }}
     {% endfor %}
 
-// {{ '}}}' }} End Members
+// {{ '}}}' }} End Properties
 {% endif %}
 
 {% if hasAttr(extAttrs, 'exposed') %}
     void {{ prefix }}{{ className }}::RegisterObject(JSContext *cx)
     {
         {% if exposed == 'class' %}
-             {{ prefix }}{{ className }}::ExposeClass<{{ constructors['maxArgs'] }}>(cx, "{{ name }}");
+             {{ prefix }}{{ className }}::ExposeClass<{{ constructors.maxArgs }}>(cx, "{{ name }}");
              {# TODO: HAS_RESERVED_SLOTS #}
         {% elif exposed == 'module' %}
             JSModules::RegisterEmbedded("{{ className }}", {{ prefix }}{{ className }}::RegisterModule);
