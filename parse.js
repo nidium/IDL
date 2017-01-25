@@ -211,7 +211,7 @@ NidiumIDL.prototype.createInterface = function(outputPath, obj, prefix)
     obj.operations = operations;
     obj.prefix = prefix;
 
-    console.log(obj);
+    console.log(obj.hasAttr(obj.extAttrs, 'exposed'));
     //console.log(obj.operations['foobar'].lst[0].idlType);
     var interfaceHeader = this.env.render('impl_class.tpl.h', obj);
     var fileNameHeader = outputPath + "/" + prefix + obj.className + ".h";

@@ -9,9 +9,14 @@
 {% set static_methods = getMethods(members, true) %}
 {% set normal_methods = getMethods(members, false ) %}
 {% set properties = getProperties(members) %}
+{% set exposed = hasAttr(extAttrs, 'exposed') %}
 
 #include <Binding/ClassMapper.h>
 #include "{{ prefix }}{{ className }}.h"
+
+{% if exposed.rhs.value == 'module' %}
+#include "Binding/JSModules.h"
+{% endif %}
 
 namespace Nidium {
 namespace Binding {
@@ -254,26 +259,48 @@ namespace Binding {
 // {{ '}}}' }} End Properties
 {% endif %}
 
-{% if hasAttr(extAttrs, 'exposed') %}
-    void {{ prefix }}{{ className }}::RegisterObject(JSContext *cx)
-    {
-        {% if exposed == 'class' %}
-             {{ prefix }}{{ className }}::ExposeClass<{{ constructors.maxArgs }}>(cx, "{{ name }}");
-             {# TODO: HAS_RESERVED_SLOTS #}
-        {% elif exposed == 'module' %}
-            JSModules::RegisterEmbedded("{{ className }}", {{ prefix }}{{ className }}::RegisterModule);
-        {% endif %}
-    }
+{% if exposed %}
+// {{ '{{{' }} Registration
+    {% if exposed.rhs.value == 'class' %}
+        {# nothing special #}
+    {% elif exposed.rhs.value == 'embed' %}
+        static JSObject *registerCallback(JSContext *cx)
+        {
+            JS::RootedObject obj(cx, JS_NewPlainObject(cx));
+            {{ prefix }}{{ classname }}::ExposeClass<1>(cx, "{{ classname }}", 0, {{ prefix }}{{ classname }}::kEmpty_ExposeFlag, obj);
+            JS::RootedValue val(cx);
+            if (!JS_GetProperty(cx, obj, {{ classname }}, &val)) {
+                return nullptr;
+            }
+            JS::RootedObject ret(cx, val.toObjectOrNull());
 
-    {% if exposed == 'module' %}
+            return ret;
+        }
+    {% elif exposed.rhs.value == 'module' %}
         JSObject *{{ prefix }}{{ className }}::RegisterModule(JSContext *cx)
         {
             JS::RootedObject exports(cx, {{ prefix }}{{ className }}::ExposeObject(cx, "{{ name }}"));
 
             return exports;
         }
+    {% else %}
+        {# thus this exposed=='embed', the rhs.value is the name to expose to #}
     {% endif %}
 
+    void {{ prefix }}{{ className }}::RegisterObject(JSContext *cx)
+    {
+        {# TODO: HAS_RESERVED_SLOTS #}
+        {% if exposed.rhs.value == 'class' %}
+        {% elif exposed.rhs.value == 'embed' %}
+             JSModules::RegisterEmbedded("{{ className }}", registerCallback);
+        {% elif exposed.rhs.value == 'module' %}
+            JSModules::RegisterEmbedded("{{ className }}", {{ prefix }}{{ className }}::RegisterModule);
+        {% else %}
+             {# thus this exposed == 'embed', the rhs.value is the name to expose to #}
+             {{ prefix }}{{ className }}::ExposeClass(cx, "{{ className }}");
+             {{ prefix }}{{ className }}::CreateUniqueInstance(cx, new {{ prefix}}{{ className }}(), "{{ exposed.rhs.value }}");
+        {% endif %}
+    }
 {% endif %}
 // {{ '}}}' }}
 
