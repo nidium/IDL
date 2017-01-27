@@ -1,0 +1,75 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:40.264164
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSStream.cpp.py
+*/
+
+
+
+
+
+/* callbacks */
+
+    callback interface StreamOnavailabledataEventHandler {
+
+     void onavailabledata(  );
+
+};
+
+    callback interface StreamOnprogressEventHandler {
+
+     void onProgress(  integer buffered,  integer total );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  DOMString url ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSStream,
+    HeaderFile=JSStream,
+    classname = Stream
+
+
+] interface Stream {
+
+    /* properties */
+
+      attribute integer fileSize;
+
+
+
+    /* methods */
+
+     Stream? getNextPacket(  );
+
+     void start(  integer packetlen );
+
+     void seek(  integer pos );
+
+
+
+    /* events */
+
+    void onavailabledata( );
+
+    void onProgress(  integer buffered,  integer total);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:40.264164 */

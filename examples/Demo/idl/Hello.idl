@@ -5,7 +5,7 @@
 };*/
 
 [
-    Constructor(cstring ip, unsigned short port),
+    Constructor(cstring ip, (unsigned short or cstring) port),
     className=Hello
 ] interface Hello
 {
@@ -13,5 +13,4 @@
     boolean foobar(optional long x, optional long last = "foo");
 
 };
-
 

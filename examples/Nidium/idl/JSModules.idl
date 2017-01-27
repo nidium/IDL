@@ -1,0 +1,75 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:38.030511
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSModules.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSglobal,
+    HeaderFile=JSglobal,
+    classname = global
+
+
+] interface global {
+
+    /* properties */
+
+    /*[static=True] static */ readonly attribute Module[] modules;
+
+
+
+    /* methods */
+
+    static DOMString require(  DOMString path );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSModule,
+    HeaderFile=JSModule,
+    classname = Module
+
+
+] interface Module {
+
+    /* properties */
+
+    /*[static=True] static */ readonly attribute integer id;
+
+    /*[static=True] static */ readonly attribute any exports;
+
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:38.030511 */

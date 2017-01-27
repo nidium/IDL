@@ -1,0 +1,119 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:35.234833
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSThread.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JS_GLOBALThread,
+    HeaderFile=JS_GLOBALThread,
+    classname = _GLOBALThread
+
+
+] interface _GLOBALThread {
+
+
+    /* methods */
+
+    static void send(  );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSThreadMessageEvent,
+    HeaderFile=JSThreadMessageEvent,
+    classname = ThreadMessageEvent
+
+
+] interface ThreadMessageEvent {
+
+
+
+};
+
+
+
+
+/* callbacks */
+
+    callback interface ThreadOncompleteEventHandler {
+
+     void oncomplete(  object event );
+
+};
+
+    callback interface ThreadOnmessageEventHandler {
+
+     void onmessage(  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSThread,
+    HeaderFile=JSThread,
+    classname = Thread
+
+
+] interface Thread {
+
+
+    /* methods */
+
+     void start(  any args );
+
+
+
+    /* events */
+
+    void oncomplete(  ThreadOncompleteEventHandler event);
+
+    void onmessage(  ThreadOnmessageEventHandler event);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:35.234833 */

@@ -1,0 +1,43 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:36.854363
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSFS.cpp.py
+*/
+
+
+
+
+/* anon_callbacks */
+
+    callback fs_readDir_Callback = void( optional integer err,  object entry );
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSfs,
+    HeaderFile=JSfs,
+    classname = fs
+
+
+] interface fs {
+
+
+    /* methods */
+
+    static void readDir(  DOMString dir,  fs_readDir_Callback fn );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:36.854363 */

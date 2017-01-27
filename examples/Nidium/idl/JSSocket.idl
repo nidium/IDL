@@ -1,0 +1,178 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:49.435763
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSSocket.cpp.py
+*/
+
+
+
+
+
+/* callbacks */
+
+    callback interface SocketClientOndisconnectEventHandler {
+
+     void ondisconnect(  SocketClient clientSocket );
+
+};
+
+    callback interface SocketClientOnreadEventHandler {
+
+     void onread(  SocketClient socketClient,  DOMString data );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSSocketClient,
+    HeaderFile=JSSocketClient,
+    classname = SocketClient
+
+
+] interface SocketClient {
+
+    /* properties */
+
+     readonly attribute DOMString ip;
+
+
+
+    /* methods */
+
+     integer write(  ( DOMString or ArrayBuffer ) data );
+
+     void disconnect(  );
+
+
+
+    /* events */
+
+    void ondisconnect(  SocketClient clientSocket);
+
+    void onread(  SocketClient socketClient,  DOMString data);
+
+
+};
+
+
+
+
+/* callbacks */
+
+    callback interface SocketOnconnectEventHandler {
+
+     void onconnect(  );
+
+};
+
+    callback interface SocketOnacceptEventHandler {
+
+     void onaccept(  SocketClient clientSocket );
+
+};
+
+    callback interface SocketOndisconnectEventHandler {
+
+     void ondisconnect(  SocketClient client );
+
+};
+
+    callback interface SocketOndrainEventHandler {
+
+     void ondrain(  );
+
+};
+
+    callback interface SocketOnreadEventHandler {
+
+     void onread(  DOMString data );
+
+};
+
+    callback interface SocketOnmessageEventHandler {
+
+     void onmessage(  DOMString data,  object details );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  DOMString host, integer port ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSSocket,
+    HeaderFile=JSSocket,
+    classname = Socket
+
+
+] interface Socket {
+
+    /* properties */
+
+      attribute boolean binary;
+
+      attribute boolean readline;
+
+      attribute integer timeout;
+
+      attribute DOMString encoding;
+
+
+
+    /* methods */
+
+     integer write(  ( DOMString or ArrayBuffer ) data );
+
+     void close(  );
+
+     void sendTo(  DOMString ip,  integer port,  ( DOMString or ArrayBuffer ) data );
+
+     Socket connect( optional DOMString mode );
+
+     Socket listen( optional DOMString mode );
+
+
+
+    /* events */
+
+    void onconnect( );
+
+    void onaccept(  SocketClient clientSocket);
+
+    void ondisconnect(  SocketClient client);
+
+    void ondrain( );
+
+    void onread(  DOMString data);
+
+    void onmessage(  DOMString data,  SocketOnmessageEventHandler details);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:49.435763 */

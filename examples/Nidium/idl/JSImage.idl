@@ -1,0 +1,70 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:36:48.771628
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSImage.cpp.py
+*/
+
+
+
+
+
+/* callbacks */
+
+    callback interface ImageLoadEventHandler {
+
+     void load(  object event );
+
+};
+
+    callback interface ImageErrorEventHandler {
+
+     void error(  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSImage,
+    HeaderFile=JSImage,
+    classname = Image
+
+
+] interface Image {
+
+    /* properties */
+
+     readonly attribute integer width;
+
+      attribute ( DOMString or Image ) src;
+
+     readonly attribute integer height;
+
+
+
+
+    /* events */
+
+    void load(  ImageLoadEventHandler event);
+
+    void error(  ImageErrorEventHandler event);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:36:48.771628 */

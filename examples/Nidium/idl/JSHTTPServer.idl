@@ -1,0 +1,143 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:50.812112
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSHTTPServer.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSHTTPRequest,
+    HeaderFile=JSHTTPRequest,
+    classname = HTTPRequest
+
+
+] interface HTTPRequest {
+
+    /* properties */
+
+     readonly attribute object headers;
+
+     readonly attribute object client;
+
+     readonly attribute DOMString method;
+
+     readonly attribute DOMString url;
+
+     readonly attribute DOMString data;
+
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSHTTPServerResponse,
+    HeaderFile=JSHTTPServerResponse,
+    classname = HTTPServerResponse
+
+
+] interface HTTPServerResponse {
+
+
+    /* methods */
+
+     void end(  ( DOMString or ArrayBuffer ) data );
+
+     void writeHead(  integer statuscode,  object kvpairs );
+
+     void write(  ( DOMString or ArrayBuffer ) data );
+
+
+
+};
+
+
+
+
+/* callbacks */
+
+    callback interface HTTPServerOndisconnectEventHandler {
+
+     void onDisconnect(  );
+
+};
+
+    callback interface HTTPServerOnrequestEventHandler {
+
+     void onrequest(  HTTPRequest request,  HTTPServerResponse response );
+
+};
+
+    callback interface HTTPServerOndataEventHandler {
+
+     void ondata(  );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  DOMString ip, integer port,optional object options ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSHTTPServer,
+    HeaderFile=JSHTTPServer,
+    classname = HTTPServer
+
+
+] interface HTTPServer {
+
+
+
+    /* events */
+
+    void onDisconnect( );
+
+    void onrequest(  HTTPRequest request,  HTTPServerResponse response);
+
+    void ondata( );
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:50.812112 */

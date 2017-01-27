@@ -1,0 +1,42 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:34.358226
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSOS.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=module,
+
+
+
+    ImplementedAs=JSOS,
+    HeaderFile=JSOS,
+    classname = OS
+
+
+] interface OS {
+
+    /* properties */
+
+    /*[static=True] static */ readonly attribute DOMString language;
+
+    /*[static=True] static */ readonly attribute DOMString platform;
+
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:34.358226 */

@@ -1,0 +1,89 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:41.487233
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSHTTP.cpp.py
+*/
+
+
+
+
+/* anon_callbacks */
+
+    callback HTTP_Callback = void(  object event );
+
+
+
+/* callbacks */
+
+    callback interface HTTPHeadersEventHandler {
+
+     void headers(  object event );
+
+};
+
+    callback interface HTTPProgressEventHandler {
+
+     void progress(  object event );
+
+};
+
+    callback interface HTTPResponseEventHandler {
+
+     void response(  object event );
+
+};
+
+    callback interface HTTPErrorEventHandler {
+
+     void error(  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  DOMString url,optional object params,optional HTTP_Callback cb ),
+
+
+    Exposed=class,
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSHTTP,
+    HeaderFile=JSHTTP,
+    classname = HTTP
+
+
+] interface HTTP {
+
+
+    /* methods */
+
+     HTTP request( optional object params );
+
+     HTTP stop(  );
+
+
+
+    /* events */
+
+    void headers(  HTTPHeadersEventHandler event);
+
+    void progress(  HTTPProgressEventHandler event);
+
+    void response(  HTTPResponseEventHandler event);
+
+    void error(  HTTPErrorEventHandler event);
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:41.487233 */

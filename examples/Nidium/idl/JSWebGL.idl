@@ -1,0 +1,1121 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:38.795563
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSWebGL.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWebGLTexture,
+    HeaderFile=JSWebGLTexture,
+    classname = WebGLTexture
+
+
+] interface WebGLTexture {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWebGL,
+    HeaderFile=JSWebGL,
+    classname = WebGL
+
+
+] interface WebGL {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSWebGLShader,
+    HeaderFile=JSWebGLShader,
+    classname = WebGLShader
+
+
+] interface WebGLShader {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSWebGLActiveInfo,
+    HeaderFile=JSWebGLActiveInfo,
+    classname = WebGLActiveInfo
+
+
+] interface WebGLActiveInfo {
+
+    /* properties */
+
+    /*[static=True] static */  attribute DOMString name;
+
+    /*[static=True] static */  attribute DOMString type;
+
+    /*[static=True] static */  attribute integer size;
+
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSWebGLShaderPrecisionFormat,
+    HeaderFile=JSWebGLShaderPrecisionFormat,
+    classname = WebGLShaderPrecisionFormat
+
+
+] interface WebGLShaderPrecisionFormat {
+
+    /* properties */
+
+    /*[static=True] static */  attribute integer rangeMax;
+
+    /*[static=True] static */  attribute integer precision;
+
+    /*[static=True] static */  attribute integer rangeMin;
+
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSWebGLUniformLocation,
+    HeaderFile=JSWebGLUniformLocation,
+    classname = WebGLUniformLocation
+
+
+] interface WebGLUniformLocation {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWebGLRenderbuffer,
+    HeaderFile=JSWebGLRenderbuffer,
+    classname = WebGLRenderbuffer
+
+
+] interface WebGLRenderbuffer {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  ),
+
+
+
+
+    ImplementedAs=JSWebGLRenderingContext,
+    HeaderFile=JSWebGLRenderingContext,
+    classname = WebGLRenderingContext
+
+
+] interface WebGLRenderingContext {
+
+    /* properties */
+
+    /*[static=True] static */ readonly attribute integer DITHER;
+
+    /*[static=True] static */ readonly attribute integer SUBPIXEL_BITS;
+
+    /*[static=True] static */ readonly attribute integer FUNC_REVERSE_SUBTRACT;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT;
+
+    /*[static=True] static */ readonly attribute integer ELEMENT_ARRAY_BUFFER;
+
+    /*[static=True] static */ readonly attribute integer TRIANGLE_STRIP;
+
+    /*[static=True] static */ readonly attribute integer MAX_COMBINED_TEXTURE_IMAGE_UNITS;
+
+    /*[static=True] static */ readonly attribute integer RGBA;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_BUFFER_BIT;
+
+    /*[static=True] static */ readonly attribute integer ELEMENT_ARRAY_BUFFER_BINDING;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_STENCIL_ATTACHMENT;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BUFFER_BIT;
+
+    /*[static=True] static */ readonly attribute integer NO_ERROR;
+
+    /*[static=True] static */ readonly attribute integer NICEST;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_BLUE_SIZE;
+
+    /*[static=True] static */ readonly attribute integer BLEND_SRC_RGB;
+
+    /*[static=True] static */ readonly attribute integer SAMPLE_COVERAGE_VALUE;
+
+    /*[static=True] static */ readonly attribute integer LINK_STATUS;
+
+    /*[static=True] static */ readonly attribute integer SRC_ALPHA_SATURATE;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_INTERNAL_FORMAT;
+
+    /*[static=True] static */ readonly attribute integer RGB;
+
+    /*[static=True] static */ readonly attribute integer FLOAT_MAT4;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_WRAP_S;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE14;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_ATTACHMENT;
+
+    /*[static=True] static */ readonly attribute integer DST_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer TRIANGLES;
+
+    /*[static=True] static */ readonly attribute integer IMPLEMENTATION_COLOR_READ_FORMAT;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_REF;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_COMPLETE;
+
+    /*[static=True] static */ readonly attribute integer UNPACK_COLORSPACE_CONVERSION_WEBGL;
+
+    /*[static=True] static */ readonly attribute integer ONE_MINUS_CONSTANT_COLOR;
+
+    /*[static=True] static */ readonly attribute integer CLAMP_TO_EDGE;
+
+    /*[static=True] static */ readonly attribute integer UNSIGNED_SHORT_4_4_4_4;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_STENCIL;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE11;
+
+    /*[static=True] static */ readonly attribute integer LINEAR;
+
+    /*[static=True] static */ readonly attribute integer MAX_RENDERBUFFER_SIZE;
+
+    /*[static=True] static */ readonly attribute integer VERSION;
+
+    /*[static=True] static */ readonly attribute integer FLOAT_MAT3;
+
+    /*[static=True] static */ readonly attribute integer MAX_VERTEX_ATTRIBS;
+
+    /*[static=True] static */ readonly attribute integer ONE_MINUS_SRC_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer UNPACK_FLIP_Y_WEBGL;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_INCOMPLETE_ATTACHMENT;
+
+    /*[static=True] static */ readonly attribute integer ACTIVE_TEXTURE;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE12;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_CLEAR_VALUE;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_RED_SIZE;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_TEST;
+
+    /*[static=True] static */ readonly attribute integer ES_VERSION_2_0;
+
+    /*[static=True] static */ readonly attribute integer LINEAR_MIPMAP_LINEAR;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_PASS_DEPTH_PASS;
+
+    /*[static=True] static */ readonly attribute integer CCW;
+
+    /*[static=True] static */ readonly attribute integer MAX_VERTEX_TEXTURE_IMAGE_UNITS;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_MAG_FILTER;
+
+    /*[static=True] static */ readonly attribute integer INCR;
+
+    /*[static=True] static */ readonly attribute integer BLEND_SRC_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer ONE_MINUS_CONSTANT_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer INVERT;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE19;
+
+    /*[static=True] static */ readonly attribute integer ACTIVE_ATTRIBUTE_MAX_LENGTH;
+
+    /*[static=True] static */ readonly attribute integer BLUE_BITS;
+
+    /*[static=True] static */ readonly attribute integer BLEND_DST_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_ATTACHMENT_OBJECT_NAME;
+
+    /*[static=True] static */ readonly attribute integer LUMINANCE;
+
+    /*[static=True] static */ readonly attribute integer RGB5_A1;
+
+    /*[static=True] static */ readonly attribute integer MAX_VERTEX_UNIFORM_VECTORS;
+
+    /*[static=True] static */ readonly attribute integer POINTS;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_REF;
+
+    /*[static=True] static */ readonly attribute integer GREEN_BITS;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_POINTER;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_BUFFER_BINDING;
+
+    /*[static=True] static */ readonly attribute integer FRONT_FACE;
+
+    /*[static=True] static */ readonly attribute integer FLOAT_VEC3;
+
+    /*[static=True] static */ readonly attribute integer FLOAT_VEC2;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_BITS;
+
+    /*[static=True] static */ readonly attribute integer PACK_ALIGNMENT;
+
+    /*[static=True] static */ readonly attribute integer BLEND_COLOR;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_TEST;
+
+    /*[static=True] static */ readonly attribute integer MIRRORED_REPEAT;
+
+    /*[static=True] static */ readonly attribute integer OUT_OF_MEMORY;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_PASS_DEPTH_PASS;
+
+    /*[static=True] static */ readonly attribute integer LINEAR_MIPMAP_NEAREST;
+
+    /*[static=True] static */ readonly attribute integer BLEND_EQUATION;
+
+    /*[static=True] static */ readonly attribute integer LINE_WIDTH;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_WRITEMASK;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP;
+
+    /*[static=True] static */ readonly attribute integer BLEND_EQUATION_RGB;
+
+    /*[static=True] static */ readonly attribute integer ALIASED_POINT_SIZE_RANGE;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_BINDING_2D;
+
+    /*[static=True] static */ readonly attribute integer SHADER_TYPE;
+
+    /*[static=True] static */ readonly attribute integer SRC_COLOR;
+
+    /*[static=True] static */ readonly attribute integer STATIC_DRAW;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_FAIL;
+
+    /*[static=True] static */ readonly attribute integer SHADER_SOURCE_LENGTH;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_STRIDE;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_BINDING_CUBE_MAP;
+
+    /*[static=True] static */ readonly attribute integer ALIASED_LINE_WIDTH_RANGE;
+
+    /*[static=True] static */ readonly attribute integer HIGH_INT;
+
+    /*[static=True] static */ readonly attribute integer CULL_FACE;
+
+    /*[static=True] static */ readonly attribute integer SRC_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer KEEP;
+
+    /*[static=True] static */ readonly attribute integer ACTIVE_ATTRIBUTES;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_UNSUPPORTED;
+
+    /*[static=True] static */ readonly attribute integer DONT_CARE;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_ATTACHMENT;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP_NEGATIVE_Z;
+
+    /*[static=True] static */ readonly attribute integer LESS;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP_NEGATIVE_X;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP_NEGATIVE_Y;
+
+    /*[static=True] static */ readonly attribute integer INVALID_FRAMEBUFFER_OPERATION;
+
+    /*[static=True] static */ readonly attribute integer FRONT;
+
+    /*[static=True] static */ readonly attribute integer GENERATE_MIPMAP_HINT;
+
+    /*[static=True] static */ readonly attribute integer MAX_TEXTURE_IMAGE_UNITS;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL;
+
+    /*[static=True] static */ readonly attribute integer NOTEQUAL;
+
+    /*[static=True] static */ readonly attribute integer VIEWPORT;
+
+    /*[static=True] static */ readonly attribute integer FLOAT_MAT2;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_WRAP_T;
+
+    /*[static=True] static */ readonly attribute integer UNSIGNED_BYTE;
+
+    /*[static=True] static */ readonly attribute integer FRONT_AND_BACK;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_BINDING;
+
+    /*[static=True] static */ readonly attribute integer RENDERER;
+
+    /*[static=True] static */ readonly attribute integer ARRAY_BUFFER_BINDING;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_MIN_FILTER;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_PASS_DEPTH_FAIL;
+
+    /*[static=True] static */ readonly attribute integer UNPACK_ALIGNMENT;
+
+    /*[static=True] static */ readonly attribute integer NUM_COMPRESSED_TEXTURE_FORMATS;
+
+    /*[static=True] static */ readonly attribute integer ONE_MINUS_DST_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer STREAM_DRAW;
+
+    /*[static=True] static */ readonly attribute integer EQUAL;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_FUNC;
+
+    /*[static=True] static */ readonly attribute integer POLYGON_OFFSET_UNITS;
+
+    /*[static=True] static */ readonly attribute integer UNSIGNED_SHORT_5_6_5;
+
+    /*[static=True] static */ readonly attribute integer IMPLEMENTATION_COLOR_READ_TYPE;
+
+    /*[static=True] static */ readonly attribute integer ONE_MINUS_DST_COLOR;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_ENABLED;
+
+    /*[static=True] static */ readonly attribute integer EXTENSIONS;
+
+    /*[static=True] static */ readonly attribute integer ALWAYS;
+
+    /*[static=True] static */ readonly attribute integer BLEND_EQUATION_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer LINES;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_HEIGHT;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP_POSITIVE_Z;
+
+    /*[static=True] static */ readonly attribute integer COMPRESSED_TEXTURE_FORMATS;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP_POSITIVE_X;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_CUBE_MAP_POSITIVE_Y;
+
+    /*[static=True] static */ readonly attribute integer INT_VEC2;
+
+    /*[static=True] static */ readonly attribute integer INT_VEC3;
+
+    /*[static=True] static */ readonly attribute integer VENDOR;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_WIDTH;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE;
+
+    /*[static=True] static */ readonly attribute integer LUMINANCE_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer COLOR_WRITEMASK;
+
+    /*[static=True] static */ readonly attribute integer SHORT;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE_2D;
+
+    /*[static=True] static */ readonly attribute integer MAX_VARYING_VECTORS;
+
+    /*[static=True] static */ readonly attribute integer RGB565;
+
+    /*[static=True] static */ readonly attribute integer COLOR_CLEAR_VALUE;
+
+    /*[static=True] static */ readonly attribute integer MEDIUM_INT;
+
+    /*[static=True] static */ readonly attribute integer LOW_FLOAT;
+
+    /*[static=True] static */ readonly attribute integer HIGH_FLOAT;
+
+    /*[static=True] static */ readonly attribute integer INFO_LOG_LENGTH;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_PASS_DEPTH_FAIL;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_COMPONENT;
+
+    /*[static=True] static */ readonly attribute integer BACK;
+
+    /*[static=True] static */ readonly attribute integer BYTE;
+
+    /*[static=True] static */ readonly attribute integer BLEND_DST_RGB;
+
+    /*[static=True] static */ readonly attribute integer BLEND;
+
+    /*[static=True] static */ readonly attribute integer SHADING_LANGUAGE_VERSION;
+
+    /*[static=True] static */ readonly attribute integer GREATER;
+
+    /*[static=True] static */ readonly attribute integer SAMPLE_ALPHA_TO_COVERAGE;
+
+    /*[static=True] static */ readonly attribute integer NEAREST_MIPMAP_NEAREST;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_FUNC;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_NORMALIZED;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_COMPONENT16;
+
+    /*[static=True] static */ readonly attribute integer FUNC_ADD;
+
+    /*[static=True] static */ readonly attribute integer DYNAMIC_DRAW;
+
+    /*[static=True] static */ readonly attribute integer FUNC_SUBTRACT;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_WRITEMASK;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_CLEAR_VALUE;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_DEPTH_SIZE;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_GREEN_SIZE;
+
+    /*[static=True] static */ readonly attribute integer CURRENT_VERTEX_ATTRIB;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE31;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE30;
+
+    /*[static=True] static */ readonly attribute integer BOOL_VEC4;
+
+    /*[static=True] static */ readonly attribute integer SAMPLE_BUFFERS;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE1;
+
+    /*[static=True] static */ readonly attribute integer LINE_STRIP;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE3;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE2;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE5;
+
+    /*[static=True] static */ readonly attribute integer ATTACHED_SHADERS;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE7;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE6;
+
+    /*[static=True] static */ readonly attribute integer ZERO;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE8;
+
+    /*[static=True] static */ readonly attribute integer DST_COLOR;
+
+    /*[static=True] static */ readonly attribute integer UNPACK_PREMULTIPLY_ALPHA_WEBGL;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE0;
+
+    /*[static=True] static */ readonly attribute integer RGBA4;
+
+    /*[static=True] static */ readonly attribute integer LOW_INT;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_INCOMPLETE_DIMENSIONS;
+
+    /*[static=True] static */ readonly attribute integer MAX_VIEWPORT_DIMS;
+
+    /*[static=True] static */ readonly attribute integer UNSIGNED_SHORT_5_5_5_1;
+
+    /*[static=True] static */ readonly attribute integer ARRAY_BUFFER;
+
+    /*[static=True] static */ readonly attribute integer MEDIUM_FLOAT;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE10;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_ALPHA_SIZE;
+
+    /*[static=True] static */ readonly attribute integer UNSIGNED_SHORT;
+
+    /*[static=True] static */ readonly attribute integer POLYGON_OFFSET_FACTOR;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_FAIL;
+
+    /*[static=True] static */ readonly attribute integer NEVER;
+
+    /*[static=True] static */ readonly attribute integer CONTEXT_LOST_WEBGL;
+
+    /*[static=True] static */ readonly attribute integer VALIDATE_STATUS;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE28;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE29;
+
+    /*[static=True] static */ readonly attribute integer BUFFER_USAGE;
+
+    /*[static=True] static */ readonly attribute integer DELETE_STATUS;
+
+    /*[static=True] static */ readonly attribute integer MAX_TEXTURE_SIZE;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE21;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE22;
+
+    /*[static=True] static */ readonly attribute integer FASTEST;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE24;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE25;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE26;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE27;
+
+    /*[static=True] static */ readonly attribute integer FLOAT_VEC4;
+
+    /*[static=True] static */ readonly attribute integer REPEAT;
+
+    /*[static=True] static */ readonly attribute integer CULL_FACE_MODE;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BITS;
+
+    /*[static=True] static */ readonly attribute integer MAX_CUBE_MAP_TEXTURE_SIZE;
+
+    /*[static=True] static */ readonly attribute integer CW;
+
+    /*[static=True] static */ readonly attribute integer BOOL_VEC2;
+
+    /*[static=True] static */ readonly attribute integer BOOL_VEC3;
+
+    /*[static=True] static */ readonly attribute integer SAMPLER_2D;
+
+    /*[static=True] static */ readonly attribute integer SHADER_COMPILER;
+
+    /*[static=True] static */ readonly attribute integer ALPHA_BITS;
+
+    /*[static=True] static */ readonly attribute integer NEAREST_MIPMAP_LINEAR;
+
+    /*[static=True] static */ readonly attribute integer BOOL;
+
+    /*[static=True] static */ readonly attribute integer SCISSOR_TEST;
+
+    /*[static=True] static */ readonly attribute integer FRAMEBUFFER_BINDING;
+
+    /*[static=True] static */ readonly attribute integer SAMPLE_COVERAGE_INVERT;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE4;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE20;
+
+    /*[static=True] static */ readonly attribute integer COLOR_BUFFER_BIT;
+
+    /*[static=True] static */ readonly attribute integer INVALID_ENUM;
+
+    /*[static=True] static */ readonly attribute integer DECR;
+
+    /*[static=True] static */ readonly attribute integer FRAGMENT_SHADER;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_WRITEMASK;
+
+    /*[static=True] static */ readonly attribute integer MAX_FRAGMENT_UNIFORM_VECTORS;
+
+    /*[static=True] static */ readonly attribute integer LINE_LOOP;
+
+    /*[static=True] static */ readonly attribute integer POLYGON_OFFSET_FILL;
+
+    /*[static=True] static */ readonly attribute integer RENDERBUFFER_STENCIL_SIZE;
+
+    /*[static=True] static */ readonly attribute integer GEQUAL;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE15;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE9;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE17;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE16;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_RANGE;
+
+    /*[static=True] static */ readonly attribute integer CONSTANT_ALPHA;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE13;
+
+    /*[static=True] static */ readonly attribute integer NEAREST;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_SIZE;
+
+    /*[static=True] static */ readonly attribute integer LEQUAL;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE18;
+
+    /*[static=True] static */ readonly attribute integer BROWSER_DEFAULT_WEBGL;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_ATTRIB_ARRAY_TYPE;
+
+    /*[static=True] static */ readonly attribute integer ONE;
+
+    /*[static=True] static */ readonly attribute integer CONSTANT_COLOR;
+
+    /*[static=True] static */ readonly attribute integer FIXED;
+
+    /*[static=True] static */ readonly attribute integer INT;
+
+    /*[static=True] static */ readonly attribute integer ONE_MINUS_SRC_COLOR;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_INDEX;
+
+    /*[static=True] static */ readonly attribute integer DEPTH_FUNC;
+
+    /*[static=True] static */ readonly attribute integer SAMPLER_CUBE;
+
+    /*[static=True] static */ readonly attribute integer COLOR_ATTACHMENT0;
+
+    /*[static=True] static */ readonly attribute integer SAMPLES;
+
+    /*[static=True] static */ readonly attribute integer COMPILE_STATUS;
+
+    /*[static=True] static */ readonly attribute integer RED_BITS;
+
+    /*[static=True] static */ readonly attribute integer BUFFER_SIZE;
+
+    /*[static=True] static */ readonly attribute integer DECR_WRAP;
+
+    /*[static=True] static */ readonly attribute integer CURRENT_PROGRAM;
+
+    /*[static=True] static */ readonly attribute integer INVALID_OPERATION;
+
+    /*[static=True] static */ readonly attribute integer UNSIGNED_INT;
+
+    /*[static=True] static */ readonly attribute integer INVALID_VALUE;
+
+    /*[static=True] static */ readonly attribute integer ALPHA;
+
+    /*[static=True] static */ readonly attribute integer VERTEX_SHADER;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_INDEX8;
+
+    /*[static=True] static */ readonly attribute integer INCR_WRAP;
+
+    /*[static=True] static */ readonly attribute integer ACTIVE_UNIFORM_MAX_LENGTH;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_VALUE_MASK;
+
+    /*[static=True] static */ readonly attribute integer SAMPLE_COVERAGE;
+
+    /*[static=True] static */ readonly attribute integer ACTIVE_UNIFORMS;
+
+    /*[static=True] static */ readonly attribute integer INT_VEC4;
+
+    /*[static=True] static */ readonly attribute integer FLOAT;
+
+    /*[static=True] static */ readonly attribute integer NONE;
+
+    /*[static=True] static */ readonly attribute integer REPLACE;
+
+    /*[static=True] static */ readonly attribute integer STENCIL_BACK_VALUE_MASK;
+
+    /*[static=True] static */ readonly attribute integer TEXTURE23;
+
+    /*[static=True] static */ readonly attribute integer TRIANGLE_FAN;
+
+    /*[static=True] static */ readonly attribute integer SCISSOR_BOX;
+
+
+
+    /* methods */
+
+     void vertexAttrib3fv(  integer index,  float[] array );
+
+     void cullFace(  integer mode );
+
+     void renderBufferStorage(  integer target,  integer internalFormat,  integer width,  integer height );
+
+     void vertexAttrib1fv(  integer index,  float[] array );
+
+     void depthMask(  boolean flag );
+
+     void bindRenderbuffer(  integer target,  WebGLRenderbuffer buffer );
+
+     void uniform2fv(  WebGLUniformLocation location,  float[] array );
+
+     void deleteProgram(  WebGLProgram Object );
+
+     void uniform4f(  integer x_pos,  integer y_pos,  integer z_index,  integer w_pos );
+
+     WebGLProgram createProgram(  );
+
+     void vertexAttrib4f(  integer index,  integer v0,  integer v1,  integer v2,  integer v3 );
+
+     void disable(  integer cap );
+
+     void blendFunc(  integer sfactor,  integer dfactor );
+
+     void getActiveUniform(  integer target );
+
+     void blendEquation(  integer mode );
+
+     void uniform2iv(  WebGLUniformLocation location,  boolean transpose,  float[] array );
+
+     DOMString getShaderInfoLog(  WebGLShader shader );
+
+     WebGLRenderbuffer createRenderBuffer(  );
+
+     void clearStencil(  integer stencil );
+
+     WebGLShader createShader(  integer type );
+
+     void getExtension(  );
+
+     void uniform4i(  WebGLUniformLocation location,  integer x_pos,  integer y_pos,  integer z_index,  integer width );
+
+     void bindAttribLocation(  WebGLProgram program,  integer vertex,  DOMString name );
+
+     void framebufferRenderbuffer(  integer target,  integer attach,  integer renderbuffer_target,  WebGLRenderbuffer renderbuffer );
+
+     void drawArrays(  integer mode,  integer first,  integer count );
+
+     WebGLBuffer createBuffer(  );
+
+     void depthFunc(  integer func );
+
+     void depthRange(  float near,  float far );
+
+     boolean isContextLost(  );
+
+     void vertexAttrib3f(  integer index,  integer v0,  integer v1,  integer v2,  integer v3 );
+
+     void drawElements(  integer mode,  integer first,  integer count,  integer offset );
+
+     void uniform4fv(  WebGLUniformLocation location,  float[] array );
+
+     void pixelStorei(  integer param,  integer value );
+
+     DOMString getProgramInfoLog(  WebGLProgram program );
+
+     void framebufferTexture2D(  integer target,  integer attach,  integer texture_target,  WebGLTexture texture,  integer level );
+
+     void disableVertexAttribArray(  integer cap );
+
+     void bufferData(  integer target,  WebGLBuffer array,  integer usage );
+
+     void bindBuffer(  integer target,  WebGLBuffer buffer );
+
+     integer getError(  );
+
+     void vertexAttrib2f(  integer index,  integer v0,  integer v1,  integer v2,  integer v3 );
+
+     void texParameteri(  integer target,  integer name,  integer value );
+
+     void texImage2D(  integer target,  integer level,  integer internalFormat,  integer width,  integer height,  integer border,  integer format,  integer type );
+
+     void compileShader( optional WebGLShader shader );
+
+     void uniform1iv(  WebGLUniformLocation location,  boolean transpose,  float[] array );
+
+     void generateMipmap(  integer target );
+
+     void clearColor(  float red,  float green,  float blue,  float alpha );
+
+     void vertexAttrib2fv(  integer index,  float[] array );
+
+     void lineWidth(  integer width );
+
+     void enableVertexAttribArray(  integer attr );
+
+     void uniform1i(  WebGLUniformLocation location,  integer x_pos,  integer y_pos,  integer z_index,  integer width );
+
+     void uniform1fv(  WebGLUniformLocation location,  float[] array );
+
+     void enable(  integer bits );
+
+     void uniform1f(  integer x_pos,  integer y_pos,  integer z_index,  integer w_pos );
+
+     void vertexAttrib1f(  integer index,  integer v0,  integer v1,  integer v2,  integer v3 );
+
+     void linkProgram(  WebGLProgram program );
+
+     void deleteTexture(  WebGLTexture Object );
+
+     void bufferSubData(  integer target,  integer offset,  WebGLBuffer array );
+
+     WebGLFramebuffer createFrameBuffer(  );
+
+     void uniform3fv(  WebGLUniformLocation location,  float[] array );
+
+     void blendEquationSeparate(  integer rgb,  integer alpha );
+
+     void frontFace(  integer mode );
+
+     void vertexAttribPointer(  integer attr,  integer size,  integer type,  boolean normalized,  integer stride,  integer offset );
+
+     void detachShader(  WebGLProgram program,  WebGLShader shader );
+
+     integer getShaderParameter(  WebGLShader shader,  integer param );
+
+     WebGLActiveInfo getActiveAttrib(  WebGLProgram program,  integer index );
+
+     void shaderSource(  WebGLShader shader,  DOMString source );
+
+     void vertexAttrib4fv(  integer index,  float[] array );
+
+     void deleteRenderbuffer(  WebGLRenderbuffer Object );
+
+     void bindTexture(  integer target,  WebGLTexture texture );
+
+     void activeTexture(  integer texture );
+
+     void deleteBuffer(  WebGLBuffer Object );
+
+     void copyTexImage2D(  integer target,  integer level,  integer internal,  integer x_pos,  integer y_pos,  integer width,  integer height,  integer border );
+
+     void uniform3f(  integer x_pos,  integer y_pos,  integer z_index,  integer w_pos );
+
+     void flush(  );
+
+     WebGLShaderPrecisionFormat getShaderPrecisionFormat(  integer shader,  integer precision );
+
+     void uniform3i(  WebGLUniformLocation location,  integer x_pos,  integer y_pos,  integer z_index,  integer width );
+
+     void deleteFramebuffer(  WebGLFramebuffer Object );
+
+     void viewPort(  integer x_pos,  integer y_pos,  integer width,  integer height );
+
+     WebGLTexture createTexture(  );
+
+     void useProgram(  WebGLProgram program );
+
+     void copyTexSubImage2D(  integer target,  integer level,  integer internal,  integer x_pos,  integer y_pos,  integer width,  integer height,  integer border );
+
+     any getParameter(  WebGLProgram program,  integer attr );
+
+     WebGLUniformLocation getUniformLocation(  WebGLProgram program,  DOMString name );
+
+     void uniform4iv(  WebGLUniformLocation location,  boolean transpose,  float[] array );
+
+     void colorMask( optional float red, optional float green, optional float blue, optional float alpha );
+
+     void uniform2f(  integer x_pos,  integer y_pos,  integer z_index,  integer w_pos );
+
+     void uniform3iv(  WebGLUniformLocation location,  boolean transpose,  float[] array );
+
+     void bindFramebuffer(  integer target,  WebGLFramebuffer buffer );
+
+     void uniform2i(  WebGLUniformLocation location,  integer x_pos,  integer y_pos,  integer z_index,  integer width );
+
+     void attachShader(  WebGLProgram program,  WebGLShader shader );
+
+     void clearDepth(  float depth );
+
+     void deleteShader(  WebGLShader Object );
+
+     void finish(  );
+
+     WebGLUniformLocation getAttribLocation(  WebGLProgram program,  DOMString attr );
+
+     void clear(  );
+
+     void blendFuncSeparate(  integer srcRgb,  integer dstRgb,  integer srcAlpha,  integer dstAlpha );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWebGLFramebuffer,
+    HeaderFile=JSWebGLFramebuffer,
+    classname = WebGLFramebuffer
+
+
+] interface WebGLFramebuffer {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWebGLBuffer,
+    HeaderFile=JSWebGLBuffer,
+    classname = WebGLBuffer
+
+
+] interface WebGLBuffer {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWebGLProgram,
+    HeaderFile=JSWebGLProgram,
+    classname = WebGLProgram
+
+
+] interface WebGLProgram {
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:38.795563 */

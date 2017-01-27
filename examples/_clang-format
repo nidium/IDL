@@ -1,23 +1,27 @@
+# Copyright 2016 Nidium Inc. All rights reserved.
+# Use of this source code is governed by a MIT license
+# that can be found in the LICENSE file.
+
 # BasedOnStyle:  WebKit
 AccessModifierOffset: -4
-AlignAfterOpenBracket: true
-AlignConsecutiveAssignments: true
+#AlignAfterOpenBracket: true
+#AlignConsecutiveAssignments: true
 AlignEscapedNewlinesLeft: true
-AlignOperands:   true
+#AlignOperands:   true
 AlignTrailingComments: true
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: false
-AllowShortCaseLabelsOnASingleLine: false
+#AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: false
-AlwaysBreakAfterDefinitionReturnType: None
+#AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
 AlwaysBreakTemplateDeclarations: true
-BinPackArguments: true
-BinPackParameters: false
-BreakBeforeBinaryOperators: All
-BreakBeforeBraces: Mozilla
+#BinPackArguments: true
+#BinPackParameters: false
+BreakBeforeBinaryOperators: false
+BreakBeforeBraces: GNU
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializersBeforeComma: false
 ColumnLimit:    80
@@ -34,11 +38,11 @@ IndentCaseLabels: true
 IndentWidth:     4
 IndentWrappedFunctionNames: false
 KeepEmptyLinesAtTheStartOfBlocks: true
-MacroBlockBegin: ''
-MacroBlockEnd:   ''
+#MacroBlockBegin: ''
+#MacroBlockEnd:   ''
 MaxEmptyLinesToKeep: 2
 NamespaceIndentation: None
-ObjCBlockIndentWidth: 4
+#ObjCBlockIndentWidth: 4
 ObjCSpaceAfterProperty: true
 ObjCSpaceBeforeProtocolList: true
 PenaltyBreakBeforeFirstCallParameter: 19
@@ -48,7 +52,7 @@ PenaltyBreakString: 1000
 PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right
-SpaceAfterCStyleCast: false
+#SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: false
@@ -57,7 +61,7 @@ SpacesInAngles:  false
 SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
-SpacesInSquareBrackets: false
+#SpacesInSquareBrackets: false
 Standard:        Cpp11
 TabWidth:        8
 UseTab:          Never

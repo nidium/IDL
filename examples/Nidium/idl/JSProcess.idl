@@ -1,0 +1,90 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:35.989401
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSProcess.cpp.py
+*/
+
+
+
+
+/* anon_callbacks */
+
+    callback NidiumProcess_setSignalHandler_Callback = void(  );
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSNidiumProcess,
+    HeaderFile=JSNidiumProcess,
+    classname = NidiumProcess
+
+
+] interface NidiumProcess {
+
+    /* properties */
+
+     readonly attribute integer workerId;
+
+     readonly attribute object argv;
+
+
+
+    /* methods */
+
+     void setOwner(  ( DOMString or integer ) user, optional ( DOMString or integer ) group );
+
+     void exit(  );
+
+     object getOwner(  );
+
+     void setSignalHandler(  NidiumProcess_setSignalHandler_Callback cb );
+
+    static DOMString cwd(  );
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSglobal,
+    HeaderFile=JSglobal,
+    classname = global
+
+
+] interface global {
+
+    /* properties */
+
+     readonly attribute object process;
+
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:35.989401 */

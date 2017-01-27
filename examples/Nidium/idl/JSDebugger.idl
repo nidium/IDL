@@ -1,0 +1,47 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:40.748712
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSDebugger.cpp.py
+*/
+
+
+
+
+/* anon_callbacks */
+
+    callback DebuggerCompartment_run_Callback = void(  DebuggerCompartment debugger, optional any[] params );
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+    Constructor(  ),
+
+
+    Exposed=class,
+
+
+
+    ImplementedAs=JSDebuggerCompartment,
+    HeaderFile=JSDebuggerCompartment,
+    classname = DebuggerCompartment
+
+
+] interface DebuggerCompartment {
+
+
+    /* methods */
+
+    static any run(  DebuggerCompartment context,  DebuggerCompartment_run_Callback cb, optional any argn );
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:40.748712 */

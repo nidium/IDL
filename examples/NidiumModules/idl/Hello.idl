@@ -1,0 +1,14 @@
+[
+    Constructor(cstring bar, optional unsigned short foo),
+    classname = Hello  /* obligated, but could default to the file's basename*/
+    ,headerfile=HelloBase /*optional; '.h' is added  */
+    /*,exposed=class *//*'class'|'embed'|'module'|/a-z+/ thus 'once' or not defined at all to not expose */
+    /*missing attributes: Alias ImplementedAs*/
+
+] interface Hello {
+    readonly attribute unsigned short foo;
+             attribute cstring        bar;
+                       boolean        foobar(unsigned short foo);
+    static             unsigned short barfoo(unsigned short bar);
+};
+

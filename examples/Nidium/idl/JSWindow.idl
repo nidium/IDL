@@ -1,0 +1,430 @@
+/* DO NOT EDIT MANUALLY, THIS FILE IS GENERATED
+    at... : 2017-01-05T12:35:44.203057
+    by... : ../../doc2idl_transformer.py
+    for.. : ../../../../Nidium/docs/JSWindow.cpp.py
+*/
+
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSNMLEvent,
+    HeaderFile=JSNMLEvent,
+    classname = NMLEvent
+
+
+] interface NMLEvent {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSkeyEvent,
+    HeaderFile=JSkeyEvent,
+    classname = keyEvent
+
+
+] interface keyEvent {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSMouseEvent,
+    HeaderFile=JSMouseEvent,
+    classname = MouseEvent
+
+
+] interface MouseEvent {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSTextInputEvent,
+    HeaderFile=JSTextInputEvent,
+    classname = TextInputEvent
+
+
+] interface TextInputEvent {
+
+
+
+};
+
+
+
+/* anon_callbacks */
+
+    callback Window_requestAnimationFrame_Callback = void(  string[] list );
+
+    callback Window_openDirDialog_Callback = void(  string[] list );
+
+    callback Window_openFileDialog_Callback = void(  string[] list );
+
+
+
+/* callbacks */
+
+    callback interface Window_onfiledragdropEventHandler {
+
+     void _onFileDragDrop(  object event );
+
+};
+
+    callback interface Window_ontextinputEventHandler {
+
+     void _ontextinput(  object event );
+
+};
+
+    callback interface Window_onfiledragEventHandler {
+
+     void _onFileDrag(  object event );
+
+};
+
+    callback interface Window_onfocusEventHandler {
+
+     void _onfocus(  );
+
+};
+
+    callback interface Window_onmousedownEventHandler {
+
+     void _onmousedown(  object event );
+
+};
+
+    callback interface Window_onmousewheelEventHandler {
+
+     void _onmousewheel(  object event );
+
+};
+
+    callback interface Window_oncloseEventHandler {
+
+     void _onclose(  WindowEvent event );
+
+};
+
+    callback interface Window_onmousemoveEventHandler {
+
+     void _onmousemove(  object event );
+
+};
+
+    callback interface Window_onfiledragleaveEventHandler {
+
+     void _onFileDragLeave(  object event );
+
+};
+
+    callback interface Window_onmouseupEventHandler {
+
+     void _onmouseup(  object event );
+
+};
+
+    callback interface Window_onsystemtrayclickEventHandler {
+
+     void _onsystemtrayclick(  object event );
+
+};
+
+    callback interface Window_onassetreadyEventHandler {
+
+     void _onassetready(  object event );
+
+};
+
+    callback interface Window_onfiledragenterEventHandler {
+
+     void _onFileDragEnter(  object event );
+
+};
+
+    callback interface Window_onkeydownEventHandler {
+
+     void _onkeydown(  object event );
+
+};
+
+    callback interface Window_onblurEventHandler {
+
+     void _onblur(  );
+
+};
+
+    callback interface Window_onreadyEventHandler {
+
+     void _onready(  WindowEvent event );
+
+};
+
+    callback interface Window_onkeyupEventHandler {
+
+     void _onkeyup(  object event );
+
+};
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+    HasEvents=True,
+
+
+    ImplementedAs=JSWindow,
+    HeaderFile=JSWindow,
+    classname = Window
+
+
+] interface Window {
+
+    /* properties */
+
+    /*[static=True] static */  attribute integer top;
+
+    /*[static=True] static */  attribute Canvas canvas;
+
+    /*[static=True] static */  attribute DOMString cursor;
+
+    /*[static=True] static */  attribute integer outerHeight;
+
+    /*[static=True] static */  attribute integer left;
+
+    /*[static=True] static */ readonly attribute object __nidium__;
+
+    /*[static=True] static */  attribute integer innerHeight;
+
+    /*[static=True] static */  attribute integer titleBarColor;
+
+    /*[static=True] static */ readonly attribute Navigator navigator;
+
+    /*[static=True] static */  attribute integer innerWidth;
+
+    /*[static=True] static */  attribute DOMString title;
+
+    /*[static=True] static */  attribute integer titleBarControlOffsetY;
+
+    /*[static=True] static */  attribute integer titleBarControlOffsetX;
+
+
+
+    /* methods */
+
+    static void requestAnimationFrame(  Window_requestAnimationFrame_Callback fn );
+
+    static void setFrame(  ( integer or DOMString ) x_pos,  ( integer or DOMString ) y_pos,  integer hh,  integer nn );
+
+    static void openDirDialog(  Window_openDirDialog_Callback fn );
+
+    static void openURL(  DOMString url );
+
+    static void center(  integer x_pos,  integer y_pos );
+
+    static void openFileDialog(  string[] types,  Window_openFileDialog_Callback fn );
+
+    static void quit(  );
+
+    static void exec(  DOMString cmd );
+
+    static void setSize(  integer width,  integer heigth );
+
+    static void notify(  object config );
+
+    static void close(  );
+
+
+
+    /* events */
+
+    void _onFileDragDrop(  Window_onfiledragdropEventHandler event);
+
+    void _ontextinput(  Window_ontextinputEventHandler event);
+
+    void _onFileDrag(  Window_onfiledragEventHandler event);
+
+    void _onfocus( );
+
+    void _onmousedown(  Window_onmousedownEventHandler event);
+
+    void _onmousewheel(  Window_onmousewheelEventHandler event);
+
+    void _onclose(  WindowEvent event);
+
+    void _onmousemove(  Window_onmousemoveEventHandler event);
+
+    void _onFileDragLeave(  Window_onfiledragleaveEventHandler event);
+
+    void _onmouseup(  Window_onmouseupEventHandler event);
+
+    void _onsystemtrayclick(  Window_onsystemtrayclickEventHandler event);
+
+    void _onassetready(  Window_onassetreadyEventHandler event);
+
+    void _onFileDragEnter(  Window_onfiledragenterEventHandler event);
+
+    void _onkeydown(  Window_onkeydownEventHandler event);
+
+    void _onblur( );
+
+    void _onready(  WindowEvent event);
+
+    void _onkeyup(  Window_onkeyupEventHandler event);
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSWindowEvent,
+    HeaderFile=JSWindowEvent,
+    classname = WindowEvent
+
+
+] interface WindowEvent {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSMouseDrag,
+    HeaderFile=JSMouseDrag,
+    classname = MouseDrag
+
+
+] interface MouseDrag {
+
+
+
+};
+
+
+
+
+
+/* class */
+
+
+[
+
+    /* extended properties*/
+
+
+
+
+    ImplementedAs=JSNavigator,
+    HeaderFile=JSNavigator,
+    classname = Navigator
+
+
+] interface Navigator {
+
+    /* properties */
+
+    /*[static=True] static */ readonly attribute DOMString appVersion;
+
+    /*[static=True] static */ readonly attribute boolean vibrate;
+
+    /*[static=True] static */ readonly attribute DOMString userAgent;
+
+    /*[static=True] static */ readonly attribute DOMString platform;
+
+    /*[static=True] static */ readonly attribute DOMString language;
+
+    /*[static=True] static */ readonly attribute DOMString appName;
+
+
+
+
+};
+
+/* END OF GENERATED FILE 2017-01-05T12:35:44.203057 */
