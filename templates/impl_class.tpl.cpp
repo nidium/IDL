@@ -14,7 +14,7 @@
 #include <Binding/ClassMapper.h>
 #include "{{ prefix }}{{ className }}.h"
 
-{% if exposed.rhs.value == 'module' %}
+{% if exposed.rhs.value == 'module' or exposed.rhs.value == 'embed' %}
 #include "Binding/JSModules.h"
 {% endif %}
 
@@ -53,7 +53,6 @@ namespace Binding {
                             inArg_{{ i }}{{ ' ' if loop.last else ', ' }}
                         {% endfor %}
                     );
-                    n_{{ prefix }}{{ className }}->root();
 
                     return n_{{ prefix }}{{ className }};
                     break;
@@ -267,9 +266,9 @@ namespace Binding {
         static JSObject *registerCallback(JSContext *cx)
         {
             JS::RootedObject obj(cx, JS_NewPlainObject(cx));
-            {{ prefix }}{{ classname }}::ExposeClass<1>(cx, "{{ classname }}", 0, {{ prefix }}{{ classname }}::kEmpty_ExposeFlag, obj);
+            {{ prefix }}{{ className }}::ExposeClass<1>(cx, "{{ className }}", 0, {{ prefix }}{{ className }}::kEmpty_ExposeFlag, obj);
             JS::RootedValue val(cx);
-            if (!JS_GetProperty(cx, obj, {{ classname }}, &val)) {
+            if (!JS_GetProperty(cx, obj, "{{ className }}", &val)) {
                 return nullptr;
             }
             JS::RootedObject ret(cx, val.toObjectOrNull());
@@ -284,7 +283,7 @@ namespace Binding {
             return exports;
         }
     {% else %}
-        {# thus this exposed=='embed', the rhs.value is the name to expose to #}
+        {# thus this exposed == 'once', the rhs.value is the name to expose to #}
     {% endif %}
 
     void {{ prefix }}{{ className }}::RegisterObject(JSContext *cx)
@@ -296,10 +295,11 @@ namespace Binding {
         {% elif exposed.rhs.value == 'module' %}
             JSModules::RegisterEmbedded("{{ className }}", {{ prefix }}{{ className }}::RegisterModule);
         {% else %}
-             {# thus this exposed == 'embed', the rhs.value is the name to expose to #}
+             {# thus this exposed == 'once', the rhs.value is the name to expose to #}
              {{ prefix }}{{ className }}::ExposeClass(cx, "{{ className }}");
              {{ prefix }}{{ className }}::CreateUniqueInstance(cx, new {{ prefix}}{{ className }}(), "{{ exposed.rhs.value }}");
         {% endif %}
+        {# //todo: call the created instances->registrationHook();#}
     }
 {% endif %}
 // {{ '}}}' }}
